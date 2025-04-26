@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{{block.super }}{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1>Добро пожаловать на наш сайт!</h1>
+    <h2>Услуги красоты с выездом к Вам домой</h2>
+    {% if username %}
+    <p>Здравствуйте, {{ username }}!</p>
+     {% else %}
+    <p>Здравствуйте, Гость!</p>
+    {% endif %}
+    <p>Вам не нужно тратить своё время на дорогу в салон, очередь - мастер приедет к вам сам!</p>
+    <p>Вы сами выбираете удобное для вас время и записываетесь на процедуру</p>
+    <p><a href="/catalog/">К услугам</a></p>
+
+    {% if user.is_authenticated %}
+        <a href="/catalog/list_of_service"><button>Список услуг, запись</button></a>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+     {{ block.super }}
+{% endblock %}
+

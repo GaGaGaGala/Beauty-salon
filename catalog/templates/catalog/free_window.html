@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}free_window{{block.super }}{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1>Свободное окно</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
+
+{% block footer %}
+     {{ block.super }}
+{% endblock %}

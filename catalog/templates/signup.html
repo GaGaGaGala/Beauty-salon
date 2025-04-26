@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{{block.super }}{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1>Регистрация</h1>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <a href="/catalog/portfolio"><button>Зарегистрироваться</button></a>
+    </form>
+{% endblock %}
+
+{% block footer %}
+     {{ block.super }}
+{% endblock %}

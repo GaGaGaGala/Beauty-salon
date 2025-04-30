@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}Главная{{block.super }}{% endblock %}
 
 {% block header %}
@@ -11,7 +10,9 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Добро пожаловать на наш сайт!</h1>
+     <p class="photo">
+    <img src="{{ service.photo.url }}" alt="connect" style="max-height:300px">
+    </p>
     <h2>Услуги красоты с выездом к Вам домой</h2>
     {% if username %}
     <p>Здравствуйте, {{ username }}!</p>

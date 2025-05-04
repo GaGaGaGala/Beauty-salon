@@ -33,6 +33,7 @@ urlpatterns = [
     path('catalog/list_of_services', catalog_views.list_of_services, name='list_of_services'),
     path('catalog/list_detail', catalog_views.list_detail, name='list_detail'),
     path('catalog/free_window', catalog_views.free_window, name='free_window'),
+    path('catalog/price_manicure', catalog_views.price_manicure, name='price_manicure'),
     path('catalog/portfolio', catalog_views.portfolio, name='portfolio'),
     path('catalog/price_list', catalog_views.price_list, name='price_list'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

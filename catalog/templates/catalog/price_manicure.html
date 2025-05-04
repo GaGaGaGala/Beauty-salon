@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Прайс лист{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Маникюр</h1>
+    <p class="photo"><img src="/static/img/ex1.png" alt="connect" style="max-height:200px, max-width:600"></p>
+    <ul>
+        {% for i in title %}
+            <li><p>{{ i }}</p></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block footer %}
+     {{ block.super }}
+{% endblock %}

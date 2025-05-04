@@ -3,6 +3,7 @@
 {% block title %}Прайс лист{% endblock %}
 
 {% block header %}
+
 {% endblock %}
 
 {% block navigation %}
@@ -11,6 +12,14 @@
 
 {% block content %}
     <h1 class="text-center">Прайс лист</h1>
+    <p class="photo"><img src="/static/img/ex5.png" alt="connect" style="max-height:200px, max-width:600"></p>
+    <ul>
+        <li><h2><a href="/catalog/price_manicure">{{ ser1 }}</a></h2></li>
+        <li><h2><a href="/catalog/price_pedicure">{{ ser2 }}</a></h2></li>
+        <li><h2><a href="/catalog/price_eyebrows">{{ ser3 }}</a></h2></li>
+        <li><h2><a href="/catalog/price_hair">{{ ser4 }}</a></h2></li>
+    </ul>
+
 {% endblock %}
 
 {% block footer %}

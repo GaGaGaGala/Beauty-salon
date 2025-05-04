@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Прайс лист{{block.super }}{% endblock %}
+{% block title %}Услуги{{block.super }}{% endblock %}
+
+{% block header %}
+
+{% endblock %}
 
 {% block navigation %}
     {{ block.super }}
@@ -8,10 +12,10 @@
 
 {% block content %}
     <h2>"Красота не требует жертв. Красота требует денег."-Карл Лагерфельд(1933-2019) немецкий модельер.</h2>
-    <h1>************ Услуги *************</h1>
+    <p class="photo"><img src="/static/img/ex6.png" alt="connect" style="max-height:200px, max-width:600"></p>
     <ul>
-        {% for service in services %}
-            <li>{{ service }}<a href="/catalog/list_detail -{{ servise }}"><button>{{ service }}- прайс лист</button></a></li>
+        {% for i in service %}
+            <li><h1><a href="/catalog/list_detail -{{ i }}">{{ i }}</a></h1></li>
         {% endfor %}
     </ul>
     {% if user.is_authenticated %}

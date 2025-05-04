@@ -13,7 +13,7 @@
 {% block content %}
     <h1>{{ service.title }}</h1>
     <h3>{{ service.content }}</h3>
-    <h3>{{ service.price }}</h3>
+    <h3>{{ service.price|floatformat:2 }}</h3>
      {% if service.photo %}
     <p class="photo">
     <img src="{{ service.photo.url }}" alt="connect" style="max-height:300px">

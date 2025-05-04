@@ -12,6 +12,7 @@ urlpatterns = [
     path('free_win/', views.free_window, name='free_window'),
     path('list_detail/', views.list_detail, name='list_detail'),
     path('price_list/', views.price_list, name='price_list'),
+    path('price_manicure/', views.price_manicure, name='price_manicure'),
     path('portfolio/', views.portfolio, name='portfolio'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

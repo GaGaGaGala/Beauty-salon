@@ -98,8 +98,36 @@ def update_profile(request):
 
 
 def price_list(request):
-    return render(request, "catalog/price_list.html")
+    ser1 = "Маникюр"
+    ser2 = "Педикюр"
+    ser3 = "Брови"
+    ser4 = "Парикмахерские услуги"
+    context = {
+        'ser1': ser1,
+        'ser2': ser2,
+        'ser3': ser3,
+        'ser4': ser4,
+    }
+    return render(request, "catalog/price_list.html", context=context)
 
 def portfolio(request):
     return render(request, "catalog/portfolio.html")
+
+def price_manicure(request):
+    title = ["Маникюр классический без покрытия", "Маникюр классический с покрытием (лак)",
+             "Маникюр + наращивание (гель) + покрытие в один тон",
+             "Коррекция ногтей (гель)",
+             "Дизайн одного ногтя",
+             "Френч",
+             "Амбре",
+             "Маникюр + покрытие (гель-лак) в один тон",
+             "Коррекция ногтей (гель-лак)",
+             "Ремонт ногтя",
+             "Снятие покрытия",
+             "Снятие нарощенных ногтей"]
+    context = {
+        'title': title,
+    }
+    return render(request, "catalog/price_manicure.html", context=context)
+
 

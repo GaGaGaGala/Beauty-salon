@@ -13,6 +13,9 @@ urlpatterns = [
     path('list_detail/', views.list_detail, name='list_detail'),
     path('price_list/', views.price_list, name='price_list'),
     path('price_manicure/', views.price_manicure, name='price_manicure'),
+    path('price_pedicure/', views.price_pedicure, name='price_pedicure'),
+    path('price_eyebrows/', views.price_eyebrows, name='price_eyebrows'),
+    path('price_hair/', views.price_hair, name='price_hair'),
     path('portfolio/', views.portfolio, name='portfolio'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

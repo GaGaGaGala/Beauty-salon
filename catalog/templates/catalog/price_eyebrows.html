@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Прайс лист{% endblock %}
@@ -11,15 +12,15 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Маникюр</h1>
-    <p class="photo"><img src="/static/img/ex1.png" alt="connect" style="max-height:200px, max-width:600"></p>
+    <h1 class="text-center">Брови</h1>
+    <p class="photo"><img src="/static/img/ex3.png" alt="connect" style="max-height:200px, max-width:600"></p>
     <ul>
         {% for i in title %}
             <li><p>{{ i }}</p></li>
         {% endfor %}
     </ul>
+        <h3><button><a href="/catalog/price_manicure">Маникюр</a></button></h3>
         <h3><button><a href="/catalog/price_pedicure">Педикюр</a></button></h3>
-        <h3><button><a href="/catalog/price_eyebrows">Брови</a></button></h3>
         <h3><button><a href="/catalog/price_hair">Парикмахерские услуги</a></button></h3>
 {% endblock %}
 

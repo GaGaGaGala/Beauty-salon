@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Портфолио{{block.super }}{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Мои работы</h1>
+<h1 class="text-center">********************************************************************************************</h1>
+    <h2 class="text-center">Парикмахерский зал</h2>
+<h1 class="text-center">********************************************************************************************</h1>
+<table>
+    <tr>
+        {% for image in images_hair %}
+        <td><img src="{{image}}" alt="connect" style="max-height:400px"></td>
+            {% if forloop.counter|divisibleby:3 %}
+            </tr><tr>
+            {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+<h1 class="text-center">********************************************************************************************</h1>
+
+<h1 class="text-center">Маникюр, дизайн ногтей</h1>
+
+<h1 class="text-center">********************************************************************************************</h1>
+<table>
+    <tr>
+        {% for image in images_manic %}
+        <td><img src="{{image}}" alt="connect" style="max-height:300px"></td>
+            {% if forloop.counter|divisibleby:3 %}
+            </tr><tr>
+            {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}
+{% block footer %}
+     {{ block.super }}
+{% endblock %}

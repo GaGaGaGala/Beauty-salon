@@ -30,21 +30,44 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+class Client(models.Model):
+    name = models.CharField(max_length=100)
+
+    def _str_(self):
+        return self.name
+
+
 class Service(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
-    client = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(upload_to='media/images', null=True, blank=True, verbose_name='Image')
-    likes = models.ManyToManyField(User, related_name='Likes', blank=True)
-    dislikes = models.ManyToManyField(User, related_name='Dislikes', blank=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    clients = models.ManyToManyField(Client, related_name='services', blank=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # photo = models.ImageField(upload_to='media/images', null=True, blank=True, verbose_name='images')
+    # likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    # dislikes = models.ManyToManyField(User, related_name='dislikes', blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return '{} {} {} {} {}'.format(self.title, self.client, self.photo, self.likes, self.dislikes)
+        return '{} {} {} {}'.format(self.title, self.content, self.client, self.price)
 
-    def number_of_likes(self):
-        return self.likes.count()
+    # def number_of_likes(self):
+    #     return self.likes.count()
+    #
+    # def number_of_dislikes(self):
+    #     return self.dislikes.count()
 
-    def number_of_dislikes(self):
-        return self.dislikes.count()
+class Image(models.Model):
+    id = models.IntegerField(primary_key=True)
+    image = models.ImageField(upload_to='images/', blank=True, verbose_name='images')
+    def im(self):
+        return self.image
+
+class Comment(models.Model):
+    services = models.ForeignKey(Service, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(Client, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    photo = models.ImageField(upload_to='media/images', null=True, blank=True, verbose_name='images')
+
+    def __str__(self):
+        return f'Comment by {self.author} on {self.services}'

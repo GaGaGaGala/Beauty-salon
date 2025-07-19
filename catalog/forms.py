@@ -1,5 +1,5 @@
 from django import forms
-from .models import Service, Profile
+from .models import Service, Profile, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Service
-        fields = ['title', 'content', 'client', 'price', 'photo']
+        fields = ['title', 'content', 'clients', 'price']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
-            'photo': forms.FileInput(attrs={'accept': 'image/*'}),
+            'clients': forms.Textarea(attrs={'class': 'form-control'}),
             'price': forms.DecimalField(max_digits=5, decimal_places=2),
         }
 
@@ -31,3 +31,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('bio', 'location', 'birth_date', 'profile_pic', 'vk', 'instagram')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('services', 'author', 'content', 'photo')

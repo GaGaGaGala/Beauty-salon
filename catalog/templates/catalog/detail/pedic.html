@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Педикюр{{block.super }}{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Педикюр</h1>
+    <p class="photo"><img src="/static/img/ex11.png" alt="connect" style="max-height:200px, max-width:300"></p>
+    <p>Обрезной или аппаратный - зависит от ваших пожеланий.</p>
+    <p class="photo"><img src="/static/img/ex12.png" alt="connect" style="max-height:200px, max-width:300"></p>
+    <p>Обрезаем длину, оформляем форму ногтей, удаляем кутикулу.</p>
+    <p>Обрабатываем стопу тёркой с одноразовыми файлами, шлифуем аппаратом.</p>
+    <p class="photo"><img src="/static/img/ex13.png" alt="connect" style="max-height:200px, max-width:300"></p>
+    <p>Можно нанести лак на ногти или покрыть гель-лаком.</p>
+    <p>Крем для ног с лёгким массажем придаёт ножкам законченный вид и доставляет удовольствие клиенту.</p>
+    <p class="photo"><img src="/static/img/ex14.png" alt="connect" style="max-height:200px, max-width:300"></p>
+    <p><a href="/catalog/list_of_services">Назад</a></p>
+{% endblock %}
+{% block footer %}
+     {{ block.super }}
+{% endblock %}

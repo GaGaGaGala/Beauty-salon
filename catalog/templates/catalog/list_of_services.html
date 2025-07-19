@@ -11,12 +11,14 @@
 {% endblock %}
 
 {% block content %}
+    <h1 class="text-center">Мои услуги</h1>
     <h2>"Красота не требует жертв. Красота требует денег."-Карл Лагерфельд(1933-2019) немецкий модельер.</h2>
     <p class="photo"><img src="/static/img/ex6.png" alt="connect" style="max-height:200px, max-width:600"></p>
     <ul>
-        {% for i in service %}
-            <li><h1><a href="/catalog/list_detail -{{ i }}">{{ i }}</a></h1></li>
-        {% endfor %}
+        <li><h1><a href="/catalog/detail/manic">Маникюр</a></h1></li>
+        <li><h1><a href="/catalog/detail/pedic">Педикюр</a></h1></li>
+        <li><h1><a href="/catalog/detail/brows">Брови</a></h1></li>
+        <li><h1><a href="/catalog/detail/hair">Парикмахерские услуги</a></h1></li>
     </ul>
     {% if user.is_authenticated %}
         <a href="/catalog/free_window"><button>Записаться на {{ service }}</button></a>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Маникюр{{block.super }}{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block navigation %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Маникюр</h1>
+    <p>Ухоженные ручки - это лицо женщины.Красивый маникюр делает нас уверенней.Я предлагаю
+    вам все виды маникюра: от простой обработки натуральных ногтей до наращивания гелем со
+    сложным дизайном.</p>
+    <p>Выбираем форму ногтей.</p>
+    <p class="photo"><img src="/static/img/ex9.png" alt="connect" style="max-height:200px, max-width:300"></p>
+    <p>Обрезной маникюр: определяемся с длинной, придаём форму ногтям,после замачивания рук
+        обрезаем кутикулу, покрываем лаком.</p>
+    <p class="photo"><img src="/static/img/ex10.png" alt="connect" style="max-height:200px, max-width:300"></p>
+
+    <p>При аппаратном маникюре кутикула обрабатывается специальными насадками.Можно покрывать
+    лаком, гель-лаком а также гелем.Всё зависит от ваших привычек и потребностей.</p>
+    <p>На фото ниже  маникюр, гель-лак, ручная роспись.</p>
+    <p class="photo"><img src="/static/img/ex7.png" alt="connect" style="max-height:200px, max-width:300"></p>
+    <p><a href="/catalog/list_of_services">Назад</a></p>
+{% endblock %}
+{% block footer %}
+     {{ block.super }}
+{% endblock %}Назад

@@ -21,5 +21,6 @@ urlpatterns = [
     path('price_hair/', views.price_hair, name='price_hair'),
     path('about/', views.about_me, name='about'),
     path('portfolio/', views.port_im, name='port'),
+    path('reg_manic/', views.reg_for_manic, name='reg_man'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

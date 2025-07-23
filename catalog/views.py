@@ -35,16 +35,8 @@ def signup(request):
 @login_required
 def free_window(request):
     """Для записи, свободное окно."""
-    if request.method == "POST":
-        form = ServiceForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.instance.client = request.user
-            form.save()
-            img_obj = form.instance
-            return redirect('catalog:list_of_service')
-    else:
-        form = ServiceForm()
-    return render(request, 'catalog/free_window.html', {'form': form})
+
+    return render(request, 'catalog/free_window.html')
 
 def list_of_services(request):
     """Все услуги."""
@@ -212,7 +204,7 @@ def port_im(request):
              '/static/img/portfolio/manic/Screenshot_20220311-221036.png', '/static/img/portfolio/manic/Screenshot_20220311-221041.png',
              '/static/img/portfolio/manic/Screenshot_20220311-221048.png', '/static/img/portfolio/manic/Screenshot_20220311-221158.png',
              '/static/img/portfolio/manic/Screenshot_20220311-221328.png', '/static/img/portfolio/manic/Screenshot_20220311-221357.png',
-             '/static/img/portfolio/manic/Screenshot_20220311-221413.png', '/static/img/portfolio/manic/Screenshot_20220311-221430.npg',
+             '/static/img/portfolio/manic/Screenshot_20220311-221413.png', '/static/img/portfolio/manic/Screenshot_20220311-221430.png',
              '/static/img/portfolio/manic/Screenshot_20220311-221439.png', '/static/img/portfolio/manic/Screenshot_20220311-221457.png',
              '/static/img/portfolio/manic/Screenshot_20220311-221559.png', '/static/img/portfolio/manic/Screenshot_20220311-221645.png',
              '/static/img/portfolio/manic/Screenshot_20220311-221742.png', '/static/img/portfolio/manic/Screenshot_20220311-221830.png',
@@ -293,3 +285,20 @@ def price_hair(request):
     }
     return render(request, "catalog/price_hair.html", context=context)
 
+def reg_for_manic(request):
+    list_man = [
+        "Маникюр классический без покрытия: ------------------------- 800 руб --------------- 30 -50 мин",
+        "Маникюр классический с покрытием (лак): ------------------- 900 руб ---------------------- 1 час",
+        "Маникюр + наращивание (гель) + покрытие: ---------------- 2500 руб ----------------- 2 - 3 часа",
+        "Маникюр + наращивание (гель) + покрытие, дизайн: ------2500 - 3000 руб ----------2 - 3 часа",
+        "Коррекция ногтей (гель): ------------------------------------ 2000 руб -------------------- 2,5 - 3 часа ",
+        "Коррекция ногтей (гель), дизайн: ------------------- 2000 - 2500 руб ------------------ 2,5 - 3 часа ",
+        "Маникюр + покрытие (гель-лак) в один тон: --------------- 1700 руб -------------------- 1,5 часа ",
+        "Коррекция ногтей (гель-лак): --------------------------------- 1800 руб ----------------- 1,5 - 2 часа",
+        "Снятие покрытия + маникюр (классич., аппарат.): ------ 1000 руб -------------------------- 1 час",
+        "Снятие нарощенных ногтей + маникюр: ------------------- 1200 руб ------------------------- 1 час"
+    ]
+    context = {
+        'list_man': list_man,
+    }
+    return render(request, "catalog/reg_manic.html", context=context)

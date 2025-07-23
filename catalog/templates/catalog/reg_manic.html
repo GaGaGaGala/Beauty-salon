@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration for manicure</title>
+</head>
+<body>
+     <ul>
+        {% for i in list_man %}
+            <li><p>{{ i }} --<button><a href="/catalog/">выбрать</a></button></p></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

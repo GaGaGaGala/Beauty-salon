@@ -7,12 +7,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Свободное окно</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
+    <h1 class="text-center">Новая запись</h1>
+    <h2>Выбрать услугу:</h2>
+    <ul>
+        <li><h1><button><a href="/catalog/reg_manic">Маникюр</a></button></h1></li>
+        <li><h1><button><a href="/catalog/reg_pedic">Педикюр</a></button></h1></li>
+        <li><h1><button><a href="/catalog/reg_hair">Парикмахерский зал</a></button></h1></li>
+        <li><h1><button><a href="/catalog/reg_brows">Брови, ресницы</a></button></h1></li>
+    </ul>
 {% endblock %}
 
 {% block footer %}

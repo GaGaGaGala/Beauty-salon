@@ -11,8 +11,8 @@
 
 {% block content %}
     <h2>Услуги красоты с выездом к Вам домой</h2>
-    {% if username %}
-    <p>Здравствуйте, {{ username }}!</p>
+    {% if user.is_authenticated %}
+    <p>Здравствуйте, {{ request.user.username }}!</p>
      {% else %}
     <p>Здравствуйте, Гость!</p>
     {% endif %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Обработка записи #{{ booking.id }}</h1>
+<p>Клиент: {{ booking.client.username }}</p>
+<p>Услуга: {{ booking.service.title }}</p>
+<p>Желаемое время: {{ booking.desired_datetime }}</p>
+<p>Район: {{ booking.client_district }}</p>
+<p>Комментарий клиента: {{ booking.client_comment }}</p>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Сохранить</button>
+</form>
+<form method="post" action="{% url 'catalog:master_booking_reject' booking.id %}">{% csrf_token %}<button type="submit">Отклонить</button></form>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

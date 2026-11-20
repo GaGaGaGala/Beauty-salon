@@ -1,0 +1,167 @@
+/* =====================================
+   BEAUTY SALON — страница онлайн-записи
+   ===================================== */
+
+:root {
+    --booking-milk: #F9F5F1;
+    --booking-cream: #F2E9E2;
+    --booking-powder: #EAD8D5;
+    --booking-rose: #C69A9D;
+    --booking-burgundy: #793E4D;
+    --booking-burgundy-dark: #5F303D;
+    --booking-text: #514342;
+    --booking-muted: #827472;
+    --booking-white: #FFFFFF;
+}
+
+.booking-page {
+    background: var(--booking-milk);
+    color: var(--booking-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 24px 0 60px;
+    min-height: 70vh;
+}
+
+.booking-container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+}
+
+/* Широкий баннер */
+.booking-hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(92, 55, 55, 0.14);
+    margin-bottom: 40px;
+}
+
+/* Заголовок и приветственный текст */
+.booking-title {
+    color: var(--booking-burgundy);
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 14px;
+}
+
+.booking-intro {
+    color: var(--booking-muted);
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 42px;
+}
+
+/* Сетка карточек */
+.booking-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px;
+}
+
+/* Карточка услуги */
+.booking-card {
+    background: var(--booking-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(92, 55, 55, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(92, 55, 55, 0.15);
+}
+
+.booking-card__image {
+    display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+.booking-card__body {
+    padding: 20px 16px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.booking-card__title {
+    color: var(--booking-text);
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Бордовая кнопка */
+.booking-button {
+    display: inline-block;
+    align-self: center;
+    padding: 12px 30px;
+    background: var(--booking-burgundy);
+    color: var(--booking-white);
+    border: 1px solid var(--booking-burgundy);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.booking-button:hover {
+    background: var(--booking-burgundy-dark);
+    border-color: var(--booking-burgundy-dark);
+    color: var(--booking-white);
+    transform: translateY(-2px);
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 900px) {
+    .booking-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .booking-card__image {
+        height: 220px;
+    }
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 520px) {
+    .booking-page {
+        padding: 16px 0 40px;
+    }
+
+    .booking-hero {
+        border-radius: 16px;
+        margin-bottom: 28px;
+    }
+
+    .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .booking-card__image {
+        height: 230px;
+    }
+
+    .booking-button {
+        width: 100%;
+        max-width: 260px;
+    }
+}

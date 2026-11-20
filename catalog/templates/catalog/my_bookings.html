@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Личный кабинет | Мой салон красоты{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+
+<div class="client-page">
+    <img class="client-hero"
+         src="{% static 'images/salon-interior.png' %}"
+         alt="Интерьер салона красоты">
+
+    <div class="client-container">
+        <div class="client-card">
+
+            <h1 class="client-title">Личный кабинет</h1>
+
+            <h2 class="client-subtitle">Мои записи</h2>
+            <div class="table-wrap">
+                <table class="client-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th>Желаемое время (запрошено вами)</th>
+                            <th>Подтверждённое время (согласовано мастером)</th>
+                            <th>Район / адрес</th>
+                            <th>Стоимость</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for b in bookings %}
+                        <tr>
+                            <td>{{ b.service.title }}</td>
+                            <td>{{ b.desired_datetime }}</td>
+                            <td>{% if b.confirmed_start %}{{ b.confirmed_start }}{% if b.confirmed_end %} — {{ b.confirmed_end }}{% endif %}{% else %}—{% endif %}</td>
+                            <td>{% if b.client_district %}{{ b.client_district }}{% else %}—{% endif %}</td>
+                            <td>{{ b.service.price }} руб.</td>
+                            <td>{{ b.get_status_display }}</td>
+                            <td>
+                                {% if b.status == 'pending' or b.status == 'proposed' or b.status == 'confirmed' %}
+                                    <a href="{% url 'catalog:booking_cancel' b.id %}">Отменить</a><br>
+                                {% endif %}
+                                {% if b.status == 'proposed' %}
+                                    <a href="{% url 'catalog:booking_accept_proposal' b.id %}">Принять предложенное время</a><br>
+                                    <a href="{% url 'catalog:booking_reject_proposal' b.id %}">Отклонить</a><br>
+                                {% endif %}
+                                {% if b.status == 'completed' %}
+                                    {% if b.id in reviewed_booking_ids %}
+                                    <span>Отзыв оставлен</span>
+                                    {% else %}
+                                    <a href="{% url 'catalog:booking_review' b.id %}">Оставить отзыв</a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="7" class="client-empty">Записей нет</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="client-subtitle">История посещений</h2>
+            <div class="table-wrap">
+                <table class="client-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th>Дата и время</th>
+                            <th>Стоимость</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for b in completed_bookings %}
+                        <tr>
+                            <td>{{ b.service.title }}</td>
+                            <td>{% if b.confirmed_start %}{{ b.confirmed_start }}{% else %}{{ b.desired_datetime }}{% endif %}</td>
+                            <td>{{ b.service.price }} руб.</td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="3" class="client-empty">История пуста</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="client-subtitle">Мои данные</h2>
+            <ul class="client-data-list">
+                <li><strong>ФИО:</strong> {{ user.last_name }} {{ user.first_name }} {{ user.profile.patronymic }}</li>
+                <li><strong>Email:</strong> {% if user.email %}{{ user.email }}{% else %}не указан{% endif %}</li>
+                <li><strong>Телефон:</strong> {% if user.profile.phone %}{{ user.profile.phone }}{% else %}не указан{% endif %}</li>
+                <li><strong>Район / адрес обслуживания:</strong> {% if user.profile.district %}{{ user.profile.district }}{% elif user.profile.location %}{{ user.profile.location }}{% else %}не указан{% endif %}</li>
+            </ul>
+            <p><a class="client-button client-button--ghost" href="{% url 'catalog:profile' %}">Редактировать данные</a></p>
+
+            <h2 class="client-subtitle">Мои отзывы</h2>
+            {% for r in reviews %}
+                <article class="review-card">
+                    <div class="review-card__header">
+                        <span class="review-card__author">{% if r.service %}{{ r.service.title }}{% else %}Услуга{% endif %}</span>
+                        <span class="review-card__meta">{{ r.created_at|date:"d.m.Y" }}</span>
+                        <span class="review-card__rating">Оценка: {{ r.rating }}/5</span>
+                        <span class="review-card__meta">
+                            {% if r.status == 'published' %}Опубликован{% elif r.status == 'rejected' %}Отклонён{% else %}На модерации{% endif %}
+                        </span>
+                    </div>
+                    {% if r.text %}
+                    <p class="review-card__text">{{ r.text }}</p>
+                    {% endif %}
+                    {% if r.photo %}
+                    <div class="review-card__photo">
+                        <img src="{{ r.photo.url }}" alt="Фото к отзыву" style="max-width: 200px; border-radius: 12px; margin-top: 8px;">
+                    </div>
+                    {% endif %}
+                </article>
+            {% empty %}
+                <p class="client-text">Отзывов пока нет</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Прайс лист{% endblock %}
+{% block title %}Прайс-лист | Мой салон красоты{% endblock %}
 
 {% block header %}
-
 {% endblock %}
 
 {% block navigation %}
@@ -11,17 +11,86 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Прайс лист</h1>
-    <p class="photo"><img src="/static/img/ex5.png" alt="connect" style="max-height:200px, max-width:600"></p>
-    <ul>
-        <li><h2><a href="/catalog/price_manicure">{{ ser1 }}</a></h2></li>
-        <li><h2><a href="/catalog/price_pedicure">{{ ser2 }}</a></h2></li>
-        <li><h2><a href="/catalog/price_eyebrows">{{ ser3 }}</a></h2></li>
-        <li><h2><a href="/catalog/price_hair">{{ ser4 }}</a></h2></li>
-    </ul>
+<link rel="stylesheet" href="{% static 'css/price_list.css' %}">
 
+<div class="price-page">
+    <div class="price-container">
+
+        <img class="price-hero"
+             src="{% static 'img/Booking/price-list-hero.png' %}"
+             alt="Прайс-лист салона красоты">
+
+        <h1 class="price-title">Прайс-лист</h1>
+
+        <p class="price-intro">
+            Выберите направление, чтобы посмотреть актуальные цены на услуги
+        </p>
+
+        <div class="price-grid">
+
+            <article class="price-card">
+                <div class="price-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M8 12V7a2 2 0 1 1 4 0v5"/>
+                        <path d="M12 12V6a2 2 0 1 1 4 0v6"/>
+                        <path d="M16 12v-1a2 2 0 1 1 4 0v4a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6v-3a2 2 0 1 1 4 0"/>
+                    </svg>
+                </div>
+                <div class="price-card__body">
+                    <h2 class="price-card__title">{{ ser1 }}</h2>
+                    <a class="price-button" href="{% url 'catalog:price_manicure' %}">Посмотреть цены</a>
+                </div>
+            </article>
+
+            <article class="price-card">
+                <div class="price-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 17c0-4 3-7 7-7 2 0 3 1 4 1 2 0 3-1 5-1 1.5 0 2.5 1 2.5 3 0 4-3 8-8 8-4 0-6-2-10.5-4z"/>
+                        <circle cx="10" cy="8" r="1.5"/>
+                        <circle cx="13" cy="7" r="1.5"/>
+                        <circle cx="16" cy="7" r="1.5"/>
+                    </svg>
+                </div>
+                <div class="price-card__body">
+                    <h2 class="price-card__title">{{ ser2 }}</h2>
+                    <a class="price-button" href="{% url 'catalog:price_pedicure' %}">Посмотреть цены</a>
+                </div>
+            </article>
+
+            <article class="price-card">
+                <div class="price-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <div class="price-card__body">
+                    <h2 class="price-card__title">{{ ser3 }}</h2>
+                    <a class="price-button" href="{% url 'catalog:price_eyebrows' %}">Посмотреть цены</a>
+                </div>
+            </article>
+
+            <article class="price-card">
+                <div class="price-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="6" cy="6" r="3"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <path d="M8.5 8.5L19 19"/>
+                        <path d="M8.5 15.5L19 5"/>
+                    </svg>
+                </div>
+                <div class="price-card__body">
+                    <h2 class="price-card__title">{{ ser4 }}</h2>
+                    <a class="price-button" href="{% url 'catalog:price_hair' %}">Посмотреть цены</a>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+</div>
 {% endblock %}
 
 {% block footer %}
-     {{ block.super }}
+    {{ block.super }}
 {% endblock %}

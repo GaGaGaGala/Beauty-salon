@@ -1,34 +1,340 @@
-{% extends "base.html" %}
 
-{% block title %}Волосы{{block.super }}{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Парикмахерские услуги | Мой салон красоты{% endblock %}
 
 {% block header %}
 {% endblock %}
 
-{% block navigation %}
-    {{ block.super }}
+{% block content %}
+
+<style>
+.hair-page {
+    background: #F9F5F1;
+    color: #514342;
+    padding-bottom: 65px;
+}
+
+.hair-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+.hair-hero {
+    text-align: center;
+    padding: 55px 15px 35px;
+}
+
+.hair-hero h1 {
+    color: #793E4D;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.hair-hero p {
+    color: #827472;
+    font-size: 19px;
+}
+
+.hair-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+    margin: 25px auto 65px;
+}
+
+.hair-intro img,
+.hair-section img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(80, 55, 50, 0.10);
+}
+
+.hair-page h2 {
+    color: #793E4D;
+    font-size: 29px;
+    margin-bottom: 20px;
+}
+
+.hair-page p {
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 15px;
+}
+
+.hair-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+    margin: 55px auto;
+    padding: 35px;
+    background: #F2E9E2;
+    border-radius: 24px;
+}
+
+.hair-section.reverse img {
+    order: 2;
+}
+
+.hair-services {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 35px;
+    margin: 55px auto;
+}
+
+.hair-services ul {
+    padding-left: 22px;
+    line-height: 2;
+}
+
+.hair-note {
+    background: #EAD8D5;
+    border-radius: 22px;
+    padding: 30px;
+    margin: 50px auto;
+}
+
+.hair-button {
+    display: inline-block;
+    background: #793E4D;
+    color: #FFFFFF !important;
+    text-decoration: none;
+    padding: 15px 38px;
+    border-radius: 30px;
+    font-size: 17px;
+    transition: 0.25s;
+}
+
+.hair-button:hover {
+    background: #63313F;
+    transform: translateY(-2px);
+}
+
+.hair-action {
+    text-align: center;
+    padding: 25px 15px;
+}
+
+@media (max-width: 760px) {
+    .hair-intro,
+    .hair-section {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .hair-section.reverse img {
+        order: 0;
+    }
+
+    .hair-intro img,
+    .hair-section img {
+        height: 300px;
+    }
+
+    .hair-section,
+    .hair-services {
+        padding: 22px;
+    }
+}
+    /* Общая кнопка возврата к услугам */
+    .beauty-button {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .beauty-button.beauty-button--secondary {
+        background: #ead8d5;
+        color: #793e4d;
+    }
+
+    .beauty-button--secondary {
+        text-decoration: none !important;
+    }
+
+    .beauty-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+    .beauty-button--secondary:hover {
+        background: #e2c9c7;
+        color: #793e4d;
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="hair-page">
+
+    <section class="hair-hero">
+        <div class="hair-container">
+            <h1>Парикмахерские услуги</h1>
+            <p>Красота волос начинается с индивидуального подхода</p>
+        </div>
+    </section>
+
+    <div class="hair-container">
+
+        <section class="hair-intro">
+            <div>
+                <h2>Ваш образ — в руках мастера</h2>
+
+                <p>
+                    Я — мастер-универсал с 26-летним опытом работы.
+                    Люблю создавать индивидуальные образы и внимательно
+                    отношусь к пожеланиям каждого клиента.
+                </p>
+
+                <p>
+                    Для меня важно не просто выполнить стрижку или окрашивание,
+                    а подобрать решение, которое подчеркнёт вашу индивидуальность
+                    и будет гармонично смотреться именно на вас.
+                </p>
+
+                <p>
+                    Работаю с разными типами и структурами волос,
+                    учитываю их особенности и состояние.
+                </p>
+            </div>
+
+            <img src="{% static 'img/services/hair/hair-bob.jpg' %}"
+                 alt="Современная стрижка боб">
+        </section>
+
+        <section class="hair-section">
+            <img src="{% static 'img/services/hair/hair-short.png' %}"
+                 alt="Короткая стрижка">
+
+            <div>
+                <h2>Стрижки с учётом вашей индивидуальности</h2>
+
+                <p>
+                    Короткие, средние и длинные стрижки — от классических
+                    форм до современных и креативных решений.
+                </p>
+
+                <p>
+                    При подборе стрижки учитываю форму лица, густоту,
+                    структуру и направление роста волос. Важно, чтобы
+                    причёска не только красиво выглядела после посещения
+                    мастера, но и была удобной в повседневной укладке.
+                </p>
+            </div>
+        </section>
+
+        <section class="hair-section reverse">
+            <img src="{% static 'img/services/hair/hair-long-front.png' %}"
+                 alt="Длинные волосы с красивым окрашиванием">
+
+            <div>
+                <h2>Окрашивание и красивые оттенки</h2>
+
+                <p>
+                    Однотонное окрашивание, мелирование, колорирование,
+                    тонирование, шатуш, балаяж и другие техники.
+                </p>
+
+                <p>
+                    Подбираю цвет с учётом исходного оттенка, состояния
+                    волос и желаемого результата. Люблю естественные
+                    переходы, мягкие переливы и гармоничные сочетания цветов.
+                </p>
+
+                <p>
+                    Работаю с профессиональными красителями
+                    Estel, Kapous и Ollin. По желанию могу использовать
+                    ваши материалы.
+                </p>
+            </div>
+        </section>
+
+        <section class="hair-section">
+            <img src="{% static 'img/services/hair/hair-long.png' %}"
+                 alt="Уход за длинными волосами">
+
+            <div>
+                <h2>Забота о здоровье волос</h2>
+
+                <p>
+                    Волосы у всех разные: тонкие и плотные, сухие и склонные
+                    к жирности, натуральные и окрашенные, ломкие или ослабленные.
+                </p>
+
+                <p>
+                    Поэтому перед процедурой важно оценить их состояние
+                    и особенности. Стараюсь подобрать подходящую технику,
+                    учитывать историю окрашиваний и бережно относиться
+                    к качеству волос.
+                </p>
+
+                <p>
+                    Также подскажу, как поддерживать цвет, ухаживать
+                    за волосами и сохранять красивую форму стрижки.
+                </p>
+            </div>
+        </section>
+
+        <section class="hair-section reverse">
+            <img src="{% static 'img/services/hair/hair-evening.png' %}"
+                 alt="Праздничная причёска">
+
+            <div>
+                <h2>Укладки и причёски для особых случаев</h2>
+
+                <p>
+                    Повседневные укладки, объёмные формы, локоны,
+                    вечерние и праздничные причёски.
+                </p>
+
+                <p>
+                    Помогу подобрать образ для торжества, важного события
+                    или просто для хорошего настроения.
+                </p>
+            </div>
+        </section>
+
+        <section class="hair-note">
+            <h2>Красота, в которой есть вы</h2>
+            <p>
+                Моя задача — не просто выполнить процедуру, а помочь
+                вам найти свой образ, в котором вы будете чувствовать
+                себя красивой и уверенной.
+            </p>
+            <p>
+                Индивидуальный подход, внимание к деталям и забота
+                о ваших волосах — всё это в комфортной домашней обстановке.
+            </p>
+        </section>
+
+        <div class="hair-action">
+            <h2>Порадуйте себя новым образом!</h2>
+            <p>Выберите удобное время для посещения.</p>
+
+            <a href="{% url 'catalog:free_window' %}" class="hair-button">
+                Записаться
+            </a>
+            <a href="{% url 'catalog:list_of_services' %}"
+               class="beauty-button beauty-button--secondary">
+                Вернуться к моим услугам
+            </a>
+        </div>
+
+    </div>
+</div>
+
 {% endblock %}
 
-{% block content %}
-    <h1 class="text-center">Парикмахерский зал</h1>
-    <p class="photo"><img src="/static/img/ex16.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <h3>В этом разделе предлагаю такие услуги: </h3>
-    <ul>
-        {% for i in service %}
-        <li>{{ i }}</li>
-        {% endfor %}
-    </ul>
-    <p>Стрижки любой длины. Тонко чувствую геометрию , поэтому стрижки получаются максимально соответствуюми
-        пожеланиям клиентов. Очень люблю экспериментировать, поэтому люблю креативные стрижки.</p>
-    <p class="photo"><img src="/static/img/ex17.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Окрашивание в один тон, мелирование, колорирование, тонирование, шатуш, амбре, краски использую свои
-    (Эстель, Капус) или ваши,если вам так угодно).</p>
-    <p class="photo"><img src="/static/img/ex18.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p class="photo"><img src="/static/img/ex20.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Креативничаю и с окрашиванием).</p>
-    <p class="photo"><img src="/static/img/ex19.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p><a href="/catalog/list_of_services">Назад</a></p>
-{% endblock %}
 {% block footer %}
-     {{ block.super }}
+    {{ block.super }}
 {% endblock %}

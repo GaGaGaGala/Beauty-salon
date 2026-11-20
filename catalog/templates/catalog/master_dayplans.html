@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Планы на день</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Добавить</button>
+</form>
+<table border="1" cellpadding="5">
+<tr><th>Дата</th><th>Начало</th><th>Начальная точка</th><th>Заметка</th></tr>
+{% for p in plans %}
+<tr><td>{{ p.date }}</td><td>{{ p.start_time }}</td><td>{{ p.start_location }}</td><td>{{ p.note }}</td></tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

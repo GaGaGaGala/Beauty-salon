@@ -1,0 +1,182 @@
+/* =====================================
+   BEAUTY SALON — страница прайс-листа
+   ===================================== */
+
+:root {
+    --price-milk: #F9F5F1;
+    --price-cream: #F2E9E2;
+    --price-powder: #EAD8D5;
+    --price-rose: #C69A9D;
+    --price-burgundy: #793E4D;
+    --price-burgundy-dark: #5F303D;
+    --price-text: #514342;
+    --price-muted: #827472;
+    --price-white: #FFFFFF;
+}
+
+.price-page {
+    background: var(--price-milk);
+    color: var(--price-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 24px 0 60px;
+    min-height: 70vh;
+}
+
+.price-container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+}
+
+/* Широкий баннер */
+.price-hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(92, 55, 55, 0.14);
+    margin-bottom: 40px;
+}
+
+/* Заголовок и поясняющий текст */
+.price-title {
+    color: var(--price-burgundy);
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 14px;
+}
+
+.price-intro {
+    color: var(--price-muted);
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 42px;
+}
+
+/* Сетка карточек */
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px;
+}
+
+/* Карточка направления */
+.price-card {
+    background: var(--price-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(92, 55, 55, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(92, 55, 55, 0.15);
+}
+
+.price-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    margin: 28px auto 0;
+    border-radius: 50%;
+    background: var(--price-powder);
+    color: var(--price-burgundy);
+}
+
+.price-card__icon svg {
+    width: 38px;
+    height: 38px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.price-card__body {
+    padding: 16px 16px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.price-card__title {
+    color: var(--price-text);
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Бордовая кнопка */
+.price-button {
+    display: inline-block;
+    align-self: center;
+    padding: 12px 30px;
+    background: var(--price-burgundy);
+    color: var(--price-white);
+    border: 1px solid var(--price-burgundy);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.price-button:hover {
+    background: var(--price-burgundy-dark);
+    border-color: var(--price-burgundy-dark);
+    color: var(--price-white);
+    transform: translateY(-2px);
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 900px) {
+    .price-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .price-card__image {
+        height: 220px;
+    }
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 520px) {
+    .price-page {
+        padding: 16px 0 40px;
+    }
+
+    .price-hero {
+        border-radius: 16px;
+        margin-bottom: 28px;
+    }
+
+    .price-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .price-card__image {
+        height: 230px;
+    }
+
+    .price-button {
+        width: 100%;
+        max-width: 260px;
+    }
+}

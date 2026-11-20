@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>График работы</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Сохранить</button>
+</form>
+<table border="1" cellpadding="5">
+<tr><th>День</th><th>Рабочий</th><th>Начало</th><th>Окончание</th></tr>
+{% for s in schedules %}
+<tr><td>{{ s.get_day_of_week_display }}</td><td>{{ s.is_working }}</td><td>{{ s.start_time }}</td><td>{{ s.end_time }}</td></tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

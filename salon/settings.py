@@ -118,9 +118,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/CSS', 'static/JS', 'static/img')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), 'img/portfolio/hair', 'img/portfolio/manic',
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type
@@ -128,5 +128,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_REDIRECT_URL = '/catalog/my-bookings/'
+LOGOUT_REDIRECT_URL = '/'
+AUTHENTICATION_BACKENDS = [
+    'catalog.backends.PhoneOrUsernameBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

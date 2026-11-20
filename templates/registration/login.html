@@ -1,25 +1,46 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block title %}Авторизация{{block.super }}{% endblock %}
-
-{% block header %}
-    {{ block.super }}
-{% endblock %}
-
-{% block navigation %}
-    {{ block.super }}
-{% endblock %}
+{% block title %}Авторизация | Мой салон красоты{% endblock %}
 
 {% block content %}
-    <h1>Логин</h1>
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <a href="/catalog/list_of_services"><button type="submit">Введите логин</button></a>
-    <input type="hidden" name="next" value="{{ next }}">
-    </form>
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
 
-{% block footer %}
-     {{ block.super }}
+<div class="client-page">
+    <img class="client-hero"
+         src="{% static 'images/auth-salon.png' %}"
+         alt="Авторизация в салоне красоты">
+
+    <div class="client-container">
+        <div class="client-card" style="max-width: 520px; margin: 0 auto;">
+
+            <h1 class="client-title">Авторизация</h1>
+
+            <form method="post" class="client-form">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="form-group">
+                    <label for="id_username">Имя пользователя</label>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password">Пароль</label>
+                    {{ form.password }}
+                    {{ form.password.errors }}
+                </div>
+
+                <button type="submit" class="client-button">Войти</button>
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+
+            <p class="client-text" style="margin-top: 18px; text-align: center;">
+                Нет аккаунта? <a href="{% url 'catalog:signup' %}">Зарегистрироваться</a>
+            </p>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

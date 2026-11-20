@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Исключения из графика</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Добавить</button>
+</form>
+<table border="1" cellpadding="5">
+<tr><th>Дата</th><th>Рабочий</th><th>Начало</th><th>Окончание</th><th>Причина</th><th></th></tr>
+{% for e in exceptions %}
+<tr>
+<td>{{ e.date }}</td><td>{{ e.is_working }}</td><td>{{ e.start_time }}</td><td>{{ e.end_time }}</td><td>{{ e.reason }}</td>
+<td><a href="{% url 'catalog:master_exception_delete' e.id %}">Удалить</a></td>
+</tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Услуги</h1>
+<a href="{% url 'catalog:master_service_create' %}">Добавить услугу</a>
+<table border="1" cellpadding="5">
+<tr><th>Название</th><th>Категория</th><th>Цена</th><th>Длительность</th><th>Активна</th><th>Действия</th></tr>
+{% for s in services %}
+<tr>
+<td>{{ s.title }}</td><td>{{ s.get_category_display }}</td><td>{{ s.price }}</td><td>{{ s.duration_minutes }}</td><td>{{ s.is_active }}</td>
+<td>
+<a href="{% url 'catalog:master_service_edit' s.id %}">Редактировать</a>
+<a href="{% url 'catalog:master_service_delete' s.id %}">Удалить</a>
+</td>
+</tr>
+{% empty %}<tr><td colspan="6">Нет услуг</td></tr>{% endfor %}
+</table>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

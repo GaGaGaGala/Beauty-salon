@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Клиенты</h1>
+{% for item in client_data %}
+  <h2>{{ item.client.username }}</h2>
+  <p>Email: {{ item.client.email }}</p>
+  <table border="1" cellpadding="5">
+    <tr><th>Услуга</th><th>Желаемое время</th><th>Подтверждённое время</th><th>Статус</th></tr>
+    {% for b in item.bookings %}
+    <tr>
+      <td>{{ b.service.title }}</td>
+      <td>{{ b.desired_datetime }}</td>
+      <td>{{ b.confirmed_start }} - {{ b.confirmed_end }}</td>
+      <td>{{ b.get_status_display }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Записей нет</td></tr>
+    {% endfor %}
+  </table>
+  <p>Выполненных посещений: {{ item.completed.count }}</p>
+{% empty %}
+  <p>Клиентов пока нет.</p>
+{% endfor %}
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

@@ -1,22 +1,79 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}free_window{{block.super }}{% endblock %}
+{% block title %}Онлайн-запись | Мой салон красоты{% endblock %}
+
+{% block header %}
+{% endblock %}
 
 {% block navigation %}
     {{ block.super }}
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Новая запись</h1>
-    <h2>Выбрать услугу:</h2>
-    <ul>
-        <li><h1><button><a href="/catalog/reg_manic">Маникюр</a></button></h1></li>
-        <li><h1><button><a href="/catalog/reg_pedic">Педикюр</a></button></h1></li>
-        <li><h1><button><a href="/catalog/reg_hair">Парикмахерский зал</a></button></h1></li>
-        <li><h1><button><a href="/catalog/reg_brows">Брови, ресницы</a></button></h1></li>
-    </ul>
+<link rel="stylesheet" href="{% static 'css/free_window.css' %}">
+
+<div class="booking-page">
+    <div class="booking-container">
+
+        <img class="booking-hero"
+             src="{% static 'img/Booking/booking-hero.png' %}"
+             alt="Онлайн-запись в салон красоты">
+
+        <h1 class="booking-title">Выберите услугу для записи</h1>
+
+        <p class="booking-intro">
+            Выберите направление, а я помогу подобрать удобное время для визита
+        </p>
+
+        <div class="booking-grid">
+
+            <article class="booking-card">
+                <img class="booking-card__image"
+                     src="{% static 'img/services/manicure/1712383229595_1.jpg' %}"
+                     alt="Маникюр">
+                <div class="booking-card__body">
+                    <h2 class="booking-card__title">Маникюр</h2>
+                    <a class="booking-button" href="/catalog/reg_manic">Записаться</a>
+                </div>
+            </article>
+
+            <article class="booking-card">
+                <img class="booking-card__image"
+                     src="{% static 'img/services/pedicure/pedicure-smart.png' %}"
+                     alt="Педикюр">
+                <div class="booking-card__body">
+                    <h2 class="booking-card__title">Педикюр</h2>
+                    <a class="booking-button" href="/catalog/reg_pedic">Записаться</a>
+                </div>
+            </article>
+
+            <article class="booking-card">
+                <img class="booking-card__image"
+                     src="{% static 'img/services/hair/hair-bob.jpg' %}"
+                     alt="Парикмахерские услуги">
+                <div class="booking-card__body">
+                    <h2 class="booking-card__title">Парикмахерские услуги</h2>
+                    <a class="booking-button" href="/catalog/reg_hair">Записаться</a>
+                </div>
+            </article>
+
+            <article class="booking-card">
+                <img class="booking-card__image"
+                     src="{% static 'img/services/brows/brows-result.png' %}"
+                     alt="Брови и ресницы">
+                <div class="booking-card__body">
+                    <h2 class="booking-card__title">Брови и ресницы</h2>
+                    <a class="booking-button" href="/catalog/reg_brows">Записаться</a>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+</div>
 {% endblock %}
 
 {% block footer %}
-     {{ block.super }}
+    {{ block.super }}
 {% endblock %}

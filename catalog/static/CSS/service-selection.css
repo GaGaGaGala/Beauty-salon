@@ -1,0 +1,266 @@
+/* =====================================
+   BEAUTY SALON — выбор услуги (manic/pedic/brows/hair)
+   ===================================== */
+
+:root {
+    --ss-milk: #F9F5F1;
+    --ss-cream: #F2E9E2;
+    --ss-powder: #EAD8D5;
+    --ss-rose: #C69A9D;
+    --ss-burgundy: #793E4D;
+    --ss-burgundy-dark: #5F303D;
+    --ss-text: #514342;
+    --ss-muted: #827472;
+    --ss-white: #FFFFFF;
+}
+
+.service-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 40px 0 70px;
+    overflow: hidden;
+    color: var(--ss-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(234, 216, 213, 0.55), transparent 46%),
+        radial-gradient(circle at 88% 12%, rgba(198, 154, 157, 0.32), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(242, 233, 226, 0.6), transparent 52%),
+        linear-gradient(135deg, #F9F5F1 0%, #F2E9E2 45%, #EAD8D5 100%);
+}
+
+.service-page::before,
+.service-page::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.42;
+    pointer-events: none;
+}
+
+.service-page::before {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -80px;
+    background: rgba(198, 154, 157, 0.45);
+}
+
+.service-page::after {
+    width: 520px;
+    height: 520px;
+    bottom: -160px;
+    right: -120px;
+    background: rgba(234, 216, 213, 0.55);
+}
+
+.service-page .service-bloom {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: 6%;
+    right: 4%;
+    opacity: 0.18;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 50% 50%, transparent 40%, rgba(121, 62, 77, 0.35) 41%, transparent 42%),
+        radial-gradient(circle at 50% 12%, rgba(121, 62, 77, 0.45) 0 8px, transparent 9px),
+        radial-gradient(circle at 88% 50%, rgba(121, 62, 77, 0.45) 0 8px, transparent 9px),
+        radial-gradient(circle at 50% 88%, rgba(121, 62, 77, 0.45) 0 8px, transparent 9px),
+        radial-gradient(circle at 12% 50%, rgba(121, 62, 77, 0.45) 0 8px, transparent 9px);
+}
+
+.service-container {
+    position: relative;
+    z-index: 1;
+    width: min(900px, 94%);
+    margin: 0 auto;
+}
+
+.service-panel {
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(92, 55, 55, 0.12);
+    padding: 46px 40px 38px;
+}
+
+.service-title {
+    color: var(--ss-burgundy);
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 34px;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.service-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: rgba(249, 245, 241, 0.62);
+    border: 1px solid rgba(198, 154, 157, 0.28);
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.service-row:hover {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 8px 22px rgba(92, 55, 55, 0.08);
+    transform: translateY(-2px);
+}
+
+.service-row__name {
+    flex: 1 1 auto;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ss-text);
+}
+
+.service-row__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.service-row__price {
+    color: var(--ss-burgundy);
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.service-row__duration {
+    color: var(--ss-muted);
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.service-choose-link {
+    text-decoration: none;
+}
+
+.service-choose {
+    padding: 10px 22px;
+    background: var(--ss-burgundy);
+    color: var(--ss-white);
+    border: 1px solid var(--ss-burgundy);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s ease;
+}
+
+.service-choose:hover {
+    background: var(--ss-burgundy-dark);
+    border-color: var(--ss-burgundy-dark);
+    color: var(--ss-white);
+    transform: translateY(-2px);
+}
+
+.service-empty {
+    text-align: center;
+    color: var(--ss-muted);
+    padding: 24px 12px;
+    font-size: 16px;
+}
+
+.service-back-wrap {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.service-back {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--ss-burgundy);
+    color: var(--ss-white);
+    border: 1px solid var(--ss-burgundy);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.service-back:hover {
+    background: var(--ss-burgundy-dark);
+    border-color: var(--ss-burgundy-dark);
+    color: var(--ss-white);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .service-panel {
+        padding: 34px 24px 28px;
+        border-radius: 24px;
+    }
+
+    .service-title {
+        margin-bottom: 24px;
+    }
+
+    .service-row {
+        gap: 12px;
+        padding: 14px 14px;
+    }
+
+    .service-row__name {
+        font-size: 15px;
+    }
+
+    .service-row__price,
+    .service-row__duration {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 520px) {
+    .service-page {
+        padding: 24px 0 50px;
+    }
+
+    .service-panel {
+        padding: 26px 16px 22px;
+        border-radius: 20px;
+    }
+
+    .service-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .service-row__meta {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .service-choose {
+        width: 100%;
+        max-width: 220px;
+    }
+
+    .service-back {
+        width: 100%;
+        max-width: 300px;
+    }
+}

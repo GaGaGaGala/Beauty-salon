@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Удалить изображение?</h1>
+<form method="post">{% csrf_token %}<button type="submit">Удалить</button></form>
+<a href="{% url 'catalog:master_portfolio' %}">Отмена</a>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

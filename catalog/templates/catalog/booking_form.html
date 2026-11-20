@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Новая заявка на запись | Мой салон красоты{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+
+<div class="client-page">
+    <img class="client-hero"
+         src="{% static 'images/salon-interior.png' %}"
+         alt="Интерьер салона красоты">
+
+    <div class="client-container">
+        <div class="client-card">
+
+            <h1 class="client-title">Новая заявка на запись</h1>
+
+            {% if selected_service %}
+            <p class="client-text">
+                Выбранная услуга: <strong>{{ selected_service.title }}</strong><br>
+                Стоимость: <strong>{{ selected_service.price }} руб.</strong>
+            </p>
+            {% endif %}
+
+            <form method="get" class="client-form client-date-form">
+                {% if selected_service %}<input type="hidden" name="service" value="{{ selected_service.id }}">{% endif %}
+                <div class="form-group" style="flex:0 0 220px;">
+                    <label for="id_date">Дата</label>
+                    <input type="date" id="id_date" name="date" value="{{ selected_date }}" required class="form-control">
+                </div>
+                <button type="submit" class="client-button">Показать свободное время</button>
+            </form>
+
+            {% if available_slots %}
+            <p class="client-text">Доступные интервалы на выбранную дату:</p>
+            <ul class="slot-list">
+                {% for slot in available_slots %}
+                <li>{{ slot|date:'d.m.Y H:i' }}</li>
+                {% endfor %}
+            </ul>
+            {% elif selected_date %}
+            <p class="client-text">На выбранную дату нет доступных интервалов.</p>
+            {% endif %}
+
+            <form method="post" class="client-form">
+                {% csrf_token %}
+                {% if selected_service %}<input type="hidden" name="service" value="{{ selected_service.id }}">{% endif %}
+                <input type="hidden" name="desired_date" value="{{ selected_date }}">
+
+                {{ form.non_field_errors }}
+
+                <div class="form-group">
+                    <label for="id_service">Услуга</label>
+                    {{ form.service }}
+                    {{ form.service.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_desired_datetime">Дата и время визита</label>
+                    {{ form.desired_datetime }}
+                    {{ form.desired_datetime.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_client_comment">Пожелания к процедуре</label>
+                    {{ form.client_comment }}
+                    {{ form.client_comment.errors }}
+                </div>
+
+                <button type="submit" class="client-button">Отправить заявку</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

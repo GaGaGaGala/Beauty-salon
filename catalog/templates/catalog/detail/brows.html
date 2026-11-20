@@ -1,6 +1,8 @@
-{% extends "base.html" %}
 
-{% block title %}Брови{{block.super }}{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Оформление бровей и ресниц{{ block.super }}{% endblock %}
 
 {% block header %}
 {% endblock %}
@@ -10,11 +12,265 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Брови</h1>
-    <p class="photo"><img src="/static/img/ex15.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Брови окрашиваем (а так же ресницы), затем корректируем </p>
-    <p><a href="/catalog/list_of_services">Назад</a></p>
+
+<style>
+    .brows-page {
+        background: #faf5f1;
+        color: #514342;
+        padding: 35px 0 60px;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .brows-container {
+        width: min(1250px, 92%);
+        margin: 0 auto;
+    }
+
+    .brows-heading {
+        text-align: center;
+        margin-bottom: 55px;
+    }
+
+    .brows-heading h1 {
+        color: #793e4d;
+        font-size: clamp(30px, 4vw, 46px);
+        margin-bottom: 12px;
+    }
+
+    .brows-heading p {
+        color: #827472;
+        font-size: 18px;
+    }
+
+    .brows-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 45px;
+        background: #f2e8e1;
+        border-radius: 26px;
+        padding: 35px;
+        margin-bottom: 35px;
+    }
+
+    .brows-section:nth-child(even) .brows-image {
+        order: 2;
+    }
+
+    .brows-section h2 {
+        color: #793e4d;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .brows-section p {
+        font-size: 17px;
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+
+    .brows-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 8px 22px rgba(80, 50, 45, 0.10);
+    }
+
+    .brows-principles {
+        background: #fffaf7;
+        border-radius: 26px;
+        padding: 35px;
+        margin-bottom: 40px;
+    }
+
+    .brows-principles h2 {
+        color: #793e4d;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .brows-principles ul {
+        font-size: 17px;
+        line-height: 2;
+        padding-left: 25px;
+    }
+
+    .brows-actions {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-top: 35px;
+    }
+
+    .brows-button {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .brows-button-primary {
+        background: #793e4d;
+        color: white;
+    }
+
+    .brows-button-secondary {
+        background: #ead8d5;
+        color: #793e4d;
+    }
+
+    .brows-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+    @media (max-width: 750px) {
+        .brows-section {
+            grid-template-columns: 1fr;
+            padding: 22px;
+            gap: 20px;
+        }
+
+        .brows-section:nth-child(even) .brows-image {
+            order: 0;
+        }
+
+        .brows-image {
+            height: 280px;
+        }
+
+        .brows-section h2 {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<div class="brows-page">
+    <div class="brows-container">
+
+        <div class="brows-heading">
+            <h1>Оформление бровей и ресниц</h1>
+            <p>Естественная красота начинается с деталей</p>
+        </div>
+
+        <section class="brows-section">
+            <div>
+                <h2>Архитектура бровей — гармония вашего образа</h2>
+                <p>
+                    Красивые брови помогают подчеркнуть черты лица
+                    и сделать взгляд более выразительным.
+                    Поэтому я не стремлюсь создавать одинаковую форму
+                    для всех — важно учитывать именно вашу внешность.
+                </p>
+                <p>
+                    При оформлении учитываю форму лица, естественную
+                    линию роста, густоту и направление волосков.
+                    Подбираю форму так, чтобы брови выглядели
+                    аккуратно и естественно.
+                </p>
+            </div>
+            <img class="brows-image"
+                 src="{% static 'img/services/brows/brows-tools.png' %}"
+                 alt="Инструменты для оформления бровей">
+        </section>
+
+        <section class="brows-section">
+            <div>
+                <h2>Аккуратная коррекция</h2>
+                <p>
+                    У каждой женщины свои особенности: у кого-то
+                    брови густые и широкие, у кого-то тонкие,
+                    светлые или с неравномерным ростом волосков.
+                </p>
+                <p>
+                    Предпочитаю точную и деликатную коррекцию
+                    пинцетом — так можно тщательно проработать
+                    форму и сохранить естественную густоту.
+                    При желании возможно удаление волосков воском.
+                </p>
+            </div>
+            <img class="brows-image"
+                 src="{% static 'img/services/brows/brows-tweezers.png' %}"
+                 alt="Коррекция формы бровей пинцетом">
+        </section>
+
+        <section class="brows-section">
+            <div>
+                <h2>Окрашивание и индивидуальный оттенок</h2>
+                <p>
+                    Цвет бровей подбираю с учётом оттенка волос,
+                    кожи и природного цвета бровей.
+                    Он может быть мягким и натуральным
+                    или более выразительным — в зависимости
+                    от ваших пожеланий.
+                </p>
+                <p>
+                    Моя задача — не перегрузить образ,
+                    а подчеркнуть естественную красоту
+                    и сделать взгляд выразительнее.
+                </p>
+            </div>
+            <img class="brows-image"
+                 src="{% static 'img/services/brows/brows-result.png' %}"
+                 alt="Аккуратно оформленные брови">
+        </section>
+
+        <section class="brows-section">
+            <div>
+                <h2>Уход за бровями и ресницами</h2>
+                <p>
+                    Также предлагаю окрашивание ресниц,
+                    чтобы сделать взгляд более выразительным
+                    и подчеркнуть естественную красоту глаз.
+                </p>
+                <p>
+                    Перед процедурой мы обсудим ваши пожелания,
+                    подберём подходящий вариант оформления
+                    и желаемую интенсивность цвета.
+                </p>
+            </div>
+            <img class="brows-image"
+                 src="{% static 'img/services/brows/brows-treatment.png' %}"
+                 alt="Процедура оформления бровей">
+        </section>
+
+        <section class="brows-principles">
+            <h2>Мой подход к красоте</h2>
+            <ul>
+                <li>Индивидуальный подбор формы и оттенка.</li>
+                <li>Бережная коррекция с сохранением естественной густоты.</li>
+                <li>Аккуратность и внимание к каждой детали.</li>
+                <li>Результат, который гармонично дополняет ваш образ.</li>
+            </ul>
+            <p>
+                Для меня важно, чтобы после процедуры вы смотрели
+                в зеркало и видели себя — только ещё красивее!
+            </p>
+        </section>
+
+        <div class="brows-actions">
+            <a href="{% url 'catalog:free_window' %}"
+               class="brows-button brows-button-primary">
+                Записаться на процедуру
+            </a>
+
+            <a href="{% url 'catalog:list_of_services' %}"
+               class="brows-button brows-button-secondary">
+                Вернуться к моим услугам
+            </a>
+        </div>
+
+    </div>
+</div>
+
 {% endblock %}
+
 {% block footer %}
-     {{ block.super }}
+    {{ block.super }}
 {% endblock %}
+

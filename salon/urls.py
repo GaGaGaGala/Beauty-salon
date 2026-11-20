@@ -44,6 +44,9 @@ urlpatterns = [
     path('catalog/portfolio', catalog_views.port_im, name='port'),
     path('catalog/price_list', catalog_views.price_list, name='price_list'),
     path('catalog/reg_manic', catalog_views.reg_for_manic, name='reg_man'),
+    path('catalog/reg_pedic', catalog_views.reg_for_pedic, name='reg_ped'),
+    path('catalog/reg_brows', catalog_views.reg_for_brows, name='reg_br'),
+    path('catalog/reg_hair', catalog_views.reg_for_hair, name='reg_hr'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

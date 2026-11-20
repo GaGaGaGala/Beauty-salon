@@ -1,0 +1,501 @@
+
+/* =====================================
+   BEAUTY SALON — главная страница
+   Нежная роскошь и современный минимализм
+   ===================================== */
+
+:root {
+    --beauty-milk: #F9F5F1;
+    --beauty-cream: #F2E9E2;
+    --beauty-powder: #EAD8D5;
+    --beauty-rose: #C69A9D;
+    --beauty-burgundy: #793E4D;
+    --beauty-text: #514342;
+    --beauty-muted: #827472;
+    --beauty-white: #FFFFFF;
+}
+
+body {
+    background-color: var(--beauty-milk);
+    color: var(--beauty-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Главная страница */
+
+.home-page {
+    overflow: hidden;
+    background: var(--beauty-milk);
+}
+
+.home-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+/* Главный баннер */
+
+.home-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 45px;
+    padding: 45px 0 65px;
+}
+
+.home-hero__image {
+    width: 100%;
+    min-width: 0;
+}
+
+.home-hero__image img {
+    display: block;
+    width: 100%;
+    max-height: 540px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(92, 55, 55, 0.12);
+}
+
+.home-hero__content {
+    padding: 20px 10px;
+}
+
+.home-hero__eyebrow {
+    color: var(--beauty-burgundy);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.home-hero__title {
+    color: var(--beauty-burgundy);
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 4vw, 49px);
+    line-height: 1.2;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.home-hero__description {
+    color: var(--beauty-muted);
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* Кнопки */
+
+.beauty-button {
+    display: inline-block;
+    padding: 15px 32px;
+    background: var(--beauty-burgundy);
+    color: var(--beauty-white);
+    border: 1px solid var(--beauty-burgundy);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.beauty-button:hover {
+    background: transparent;
+    color: var(--beauty-burgundy);
+    transform: translateY(-2px);
+}
+
+/* Приветствие */
+
+.home-intro {
+    padding: 65px 0;
+    background: var(--beauty-white);
+}
+
+.home-intro__inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home-intro__greeting {
+    color: var(--beauty-burgundy);
+    font-family: Georgia, serif;
+    font-size: 34px;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.home-intro p {
+    color: var(--beauty-text);
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 16px;
+}
+
+.home-intro ul {
+    display: inline-block;
+    text-align: left;
+    line-height: 2;
+    padding-left: 25px;
+}
+
+.home-intro li::marker {
+    color: var(--beauty-rose);
+}
+
+/* Направления услуг */
+
+.home-services {
+    padding: 75px 0 85px;
+}
+
+.home-section-title {
+    color: var(--beauty-burgundy);
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.home-section-subtitle {
+    color: var(--beauty-muted);
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+.home-services__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.home-service-card {
+    display: block;
+    overflow: hidden;
+    background: var(--beauty-white);
+    border-radius: 18px;
+    text-decoration: none;
+    color: var(--beauty-text);
+    box-shadow: 0 8px 25px rgba(92, 55, 55, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(92, 55, 55, 0.14);
+    color: var(--beauty-burgundy);
+}
+
+.home-service-card__image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.home-service-card__title {
+    padding: 20px 12px;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* Адаптация для планшетов */
+
+@media (max-width: 900px) {
+    .home-hero {
+        gap: 25px;
+    }
+
+    .home-services__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-service-card__image {
+        height: 230px;
+    }
+}
+
+/* Адаптация для телефонов */
+
+@media (max-width: 600px) {
+    .home-container {
+        width: 92%;
+    }
+
+    .home-hero {
+        grid-template-columns: 1fr;
+        padding: 22px 0 40px;
+        gap: 20px;
+    }
+
+    .home-hero__image {
+        order: 1;
+    }
+
+    .home-hero__content {
+        order: 2;
+        padding: 10px 3px;
+        text-align: center;
+    }
+
+    .home-hero__image img {
+        max-height: 340px;
+        border-radius: 18px;
+    }
+
+    .home-hero__title {
+        font-size: 34px;
+    }
+
+    .home-hero__description {
+        font-size: 15px;
+    }
+
+    .home-intro {
+        padding: 45px 0;
+    }
+
+    .home-intro__greeting {
+        font-size: 29px;
+    }
+
+    .home-intro p {
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .home-intro ul {
+        font-size: 14px;
+    }
+
+    .home-services {
+        padding: 50px 0;
+    }
+
+    .home-services__grid {
+        gap: 14px;
+    }
+
+    .home-service-card__image {
+        height: 145px;
+    }
+
+    .home-service-card__title {
+        padding: 14px 7px;
+        font-size: 17px;
+    }
+
+    .beauty-button {
+        padding: 14px 27px;
+    }
+}
+
+/* Страница «Мои услуги» */
+
+.services-page {
+    background: #F9F5F1;
+    color: #514342;
+    padding: 45px 0 65px;
+    min-height: 70vh;
+}
+
+.services-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+.services-title {
+    text-align: center;
+    color: #793E4D;
+    margin-bottom: 18px;
+}
+
+.services-quote {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.services-quote span {
+    display: block;
+    font-size: 15px;
+    color: #827472;
+    margin-top: 8px;
+}
+
+.services-intro {
+    text-align: center;
+    margin: 25px 0 35px;
+    color: #827472;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.service-card {
+    display: block;
+    text-decoration: none;
+    color: #514342;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(80, 50, 50, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(80, 50, 50, 0.14);
+    color: #793E4D;
+}
+
+.service-card img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.service-card h2 {
+    text-align: center;
+    font-size: 19px;
+    padding: 18px 10px;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card img {
+        height: 260px;
+    }
+}
+
+/* Компактная страница «Мои услуги» */
+
+.services-page {
+    background: #F9F5F1;
+    padding: 20px 0 30px;
+    min-height: 65vh;
+}
+
+.services-container {
+    width: min(1180px, 96%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-banner {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 540px;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 18px;
+}
+
+.services-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 18px auto 10px;
+    font-size: 17px;
+}
+
+.services-links a {
+    color: #793E4D;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.services-links a:hover {
+    color: #B87980;
+    text-decoration: underline;
+}
+
+.services-links span {
+    color: #C69A9D;
+}
+
+@media (max-width: 600px) {
+    .services-page {
+        padding: 10px 0 20px;
+    }
+
+    .services-banner {
+        border-radius: 10px;
+    }
+
+    .services-links {
+        gap: 8px;
+        font-size: 15px;
+    }
+}
+
+/* Общие кнопки на страницах услуг */
+.brows-button,
+.beauty-button {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.brows-button.brows-button-secondary,
+.beauty-button.beauty-button--secondary {
+    background: #ead8d5;
+    color: #793e4d;
+}
+
+.brows-button:hover,
+.beauty-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Общая кнопка возврата к услугам */
+.beauty-button--secondary,
+.beauty-button-secondary {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: #ead8d5;
+    color: #793e4d !important;
+    text-decoration: none !important;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.beauty-button--secondary:hover,
+.beauty-button-secondary:hover {
+    background: #e2c9c7;
+    color: #793e4d !important;
+    text-decoration: none !important;
+    transform: translateY(-2px);
+}

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Прайс лист{% endblock %}
+{% block title %}Парикмахерские услуги | Мой салон красоты{% endblock %}
 
 {% block header %}
-
 {% endblock %}
 
 {% block navigation %}
@@ -11,18 +11,53 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Парикмахерские услуги</h1>
-    <p class="photo"><img src="/static/img/ex2.png" alt="connect" style="max-height:200px, max-width:600"></p>
-    <ul>
-        {% for i in title %}
-            <li><p>{{ i }}</p></li>
-        {% endfor %}
-    </ul>
-        <h3><button><a href="/catalog/price_manicure">Маникюр</a></button></h3>
-        <h3><button><a href="/catalog/price_pedicure">Педикюр</a></button></h3>
-        <h3><button><a href="/catalog/price_eyebrows">Брови</a></button></h3>
+<link rel="stylesheet" href="{% static 'css/price_hair.css' %}">
+
+<div class="price-detail-page">
+    <div class="price-detail-container">
+        <div class="price-detail-panel">
+
+            <h1 class="price-detail-title">Парикмахерские услуги</h1>
+
+            <ul class="price-detail-list">
+                {% for item in title %}
+                <li class="price-row" data-clean="{{ item|cut:"*" }}">{{ item|cut:"*" }}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="price-detail-actions">
+                <a class="price-detail-back" href="{% url 'catalog:price_list' %}">Назад к прайс-листу</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.price-row').forEach(function (row) {
+        const raw = (row.dataset.clean || row.textContent || '').trim();
+        const tokens = raw.split(/\s+/).filter(Boolean);
+        let price = '';
+        let nameTokens = tokens.slice();
+        if (tokens.length >= 2 && tokens[tokens.length - 2].toLowerCase() === 'от') {
+            price = tokens.slice(-2).join(' ');
+            nameTokens = tokens.slice(0, -2);
+        } else if (tokens.length >= 1) {
+            price = tokens.pop();
+            nameTokens = tokens;
+        }
+        const name = nameTokens.join(' ');
+        if (name && price) {
+            row.innerHTML = '<span class="price-row__name"></span><span class="price-row__price"></span>';
+            row.querySelector('.price-row__name').textContent = name;
+            row.querySelector('.price-row__price').textContent = price;
+        }
+    });
+});
+</script>
 {% endblock %}
 
 {% block footer %}
-     {{ block.super }}
+    {{ block.super }}
 {% endblock %}

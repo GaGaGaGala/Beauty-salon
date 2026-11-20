@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{% if service %}Редактирование услуги{% else %}Новая услуга{% endif %}</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Сохранить</button>
+</form>
+{% if service %}<a href="{% url 'catalog:master_services' %}">Назад</a>{% endif %}
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

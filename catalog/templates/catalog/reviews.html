@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Отзывы | Мой салон красоты{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+
+<div class="client-page">
+    <img class="client-hero"
+         src="{% static 'images/salon-interior.png' %}"
+         alt="Интерьер салона красоты">
+
+    <div class="client-container">
+        <div class="client-card">
+
+            <h1 class="client-title">Отзывы моих клиентов</h1>
+            <p class="client-text">
+                Спасибо за доверие и тёплые слова. Здесь собраны отзывы клиентов после выполненных процедур.
+            </p>
+
+            {% if reviews %}
+                {% for review in reviews %}
+                <article class="review-card" id="review-{{ review.id }}">
+                    <div class="review-card__header">
+                        <span class="review-card__author">
+                            {% if review.client.first_name or review.client.last_name %}
+                                {{ review.client.first_name }} {{ review.client.last_name }}
+                            {% else %}
+                                {{ review.client.username }}
+                            {% endif %}
+                        </span>
+                        <span class="review-card__meta">{{ review.created_at|date:"d.m.Y" }}</span>
+                        {% if review.service %}
+                        <span class="review-card__meta">{{ review.service.title }}</span>
+                        {% endif %}
+                        <span class="review-card__rating">Оценка: {{ review.rating }}/5</span>
+                    </div>
+                    {% if review.text %}
+                    <p class="review-card__text">{{ review.text }}</p>
+                    {% endif %}
+                    {% if review.photo %}
+                    <div class="review-card__photo">
+                        <img src="{{ review.photo.url }}" alt="Фото к отзыву" style="max-width: 240px; border-radius: 12px; margin-top: 8px;">
+                    </div>
+                    {% endif %}
+                    <div class="review-reactions" style="margin-top: 10px;">
+                        <span>Нравится: {{ review.likes.count }}</span>
+                        {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'catalog:review_like' review.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">{% if user in review.likes.all %}Убрать лайк{% else %}Нравится{% endif %}</button>
+                        </form>
+                        {% endif %}
+                        <span style="margin-left: 12px;">Не нравится: {{ review.dislikes.count }}</span>
+                        {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'catalog:review_dislike' review.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">{% if user in review.dislikes.all %}Убрать дизлайк{% else %}Не нравится{% endif %}</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            {% else %}
+                <div class="review-empty">Здесь скоро появятся отзывы моих клиентов</div>
+            {% endif %}
+
+            {% if not user.is_authenticated %}
+            <p class="client-text">
+                Хотите оставить отзыв? Войдите или зарегистрируйтесь, чтобы получить возможность оставить отзыв после выполненной услуги.
+            </p>
+            <p style="margin-top: 18px;">
+                <a class="client-button" href="{% url 'login' %}">Войти</a>
+                <a class="client-button client-button--ghost" href="{% url 'catalog:signup' %}">Зарегистрироваться</a>
+            </p>
+            {% else %}
+            <p class="client-text">
+                Отзыв можно оставить после выполненной услуги. Новые отзывы проходят модерацию мастером.
+            </p>
+            <p style="margin-top: 18px;">
+                <a class="client-button" href="{% url 'catalog:review_create' %}">Оставить отзыв</a>
+            </p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

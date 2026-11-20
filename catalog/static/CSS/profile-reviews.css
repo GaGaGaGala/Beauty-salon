@@ -1,0 +1,133 @@
+/* =====================================
+   BEAUTY SALON — профиль, отзывы, навигация
+   ===================================== */
+
+/* Навигация сайта */
+.navbar {
+    overflow: hidden;
+    background: linear-gradient(90deg, #F2E9E2 0%, #EAD8D5 100%);
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: center;
+    box-shadow: 0 6px 18px rgba(92, 55, 55, 0.08);
+}
+
+.navbar a {
+    float: none;
+    color: #793E4D;
+    text-align: center;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: #793E4D;
+    color: #FFFFFF;
+}
+
+.navbar p {
+    float: none;
+    color: #514342;
+    margin: 0 0 0 auto;
+    font-size: 14px;
+    text-align: right;
+}
+
+/* Сетка полей формы профиля */
+.profile-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+}
+
+.profile-form .form-group {
+    flex: unset;
+}
+
+@media (max-width: 640px) {
+    .profile-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Карточки отзывов */
+.review-card {
+    background: rgba(249, 245, 241, 0.7);
+    border: 1px solid rgba(198, 154, 157, 0.25);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 18px rgba(92, 55, 55, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(92, 55, 55, 0.1);
+}
+
+.review-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.review-card__author {
+    color: #793E4D;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.review-card__meta {
+    color: #827472;
+    font-size: 13px;
+}
+
+.review-card__rating {
+    color: #793E4D;
+    font-weight: 600;
+}
+
+.review-card__text {
+    color: #514342;
+    line-height: 1.6;
+    margin: 8px 0 0;
+    white-space: pre-wrap;
+}
+
+.review-empty {
+    text-align: center;
+    color: #827472;
+    padding: 28px 12px;
+    border: 1px dashed rgba(198, 154, 157, 0.45);
+    border-radius: 18px;
+    background: rgba(249, 245, 241, 0.5);
+    font-size: 16px;
+}
+
+/* Адаптивность навигации на телефонах */
+@media (max-width: 520px) {
+    .navbar {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+
+    .navbar a {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .navbar p {
+        width: 100%;
+        text-align: left;
+        margin: 6px 0 0;
+    }
+}

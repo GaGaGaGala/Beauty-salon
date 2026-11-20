@@ -1,34 +1,73 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}catalog{{block.super }}{% endblock %}
-
-{% block navigation %}
-    {{ block.super }}
-{% endblock %}
+{% block title %}Редактирование данных | Мой салон красоты{% endblock %}
 
 {% block content %}
-    <h1>Профиль</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Сохранить изменения</button>
-    </form>
-    {% if user.profile.profile_pic %}
-      <img src="{{ profile.profile_pic.url }}" height=100 width=100><br><br>
-      <input type="submit" value="Save">
-    {% endif %}
-    {% if profile.VK %}
-      <p><strong>VK:</strong> {{ profile.vk }}</p><br><br>
-    {% endif %}
-    {% if profile.instagram %}
-      <p><strong>Instagram:</strong> {{ profile.instagram }}</p><br><br>
-    {% endif %}
-    <h2>{{ user.get_full_name }}</h2>
-    <ul>
-        <li>{{ user.username }}</li>
-        <li>{{ user.profile.location }}</li>
-        <li>{{ user.profile.birth_date }}</li>
-        <li>{{ user.profile.advertisement_count }}</li>
-    </ul>
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+
+<div class="client-page">
+    <img class="client-hero"
+         src="{% static 'images/salon-interior.png' %}"
+         alt="Интерьер салона красоты">
+
+    <div class="client-container">
+        <div class="client-card">
+
+            <h1 class="client-title">Редактирование данных</h1>
+
+            <form method="post" class="client-form profile-form">
+                {% csrf_token %}
+
+                {{ user_form.non_field_errors }}
+                {{ profile_form.non_field_errors }}
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="id_first_name">Имя</label>
+                        {{ user_form.first_name }}
+                        {{ user_form.first_name.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_last_name">Фамилия</label>
+                        {{ user_form.last_name }}
+                        {{ user_form.last_name.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">Электронная почта</label>
+                        {{ user_form.email }}
+                        {{ user_form.email.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_patronymic">Отчество</label>
+                        {{ profile_form.patronymic }}
+                        {{ profile_form.patronymic.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_birth_date">Дата рождения</label>
+                        {{ profile_form.birth_date }}
+                        {{ profile_form.birth_date.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_phone">Телефон</label>
+                        {{ profile_form.phone }}
+                        {{ profile_form.phone.errors }}
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="id_district">Район обслуживания / проживания</label>
+                        {{ profile_form.district }}
+                        {{ profile_form.district.errors }}
+                    </div>
+                </div>
+
+                <button type="submit" class="client-button">Сохранить изменения</button>
+            </form>
+
+            <p style="margin-top: 18px;">
+                <a class="client-button client-button--ghost" href="{% url 'catalog:my_bookings' %}">Вернуться в личный кабинет</a>
+            </p>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

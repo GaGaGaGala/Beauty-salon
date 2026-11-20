@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Отзыв{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+<div class="client-page">
+    <div class="client-container">
+        <div class="client-card">
+            <h1 class="client-title">Оставить отзыв</h1>
+            {% if booking %}
+            <p class="client-text">Услуга: {{ booking.service.title }}</p>
+            {% endif %}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p style="margin-top: 18px;">
+                    <button type="submit" class="client-button">Отправить отзыв</button>
+                    <a class="client-button client-button--ghost" href="{% url 'catalog:reviews' %}">Вернуться к отзывам</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

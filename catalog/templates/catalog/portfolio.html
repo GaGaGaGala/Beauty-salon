@@ -1,47 +1,232 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
+{% load static %}
 
-{% block title %}Портфолио{{block.super }}{% endblock %}
-
-{% block header %}
-
-{% endblock %}
-
-{% block navigation %}
-    {{ block.super }}
-{% endblock %}
+{% block title %}Портфолио{{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Мои работы</h1>
-<h1 class="text-center">********************************************************************************************</h1>
-    <h2 class="text-center">Парикмахерский зал</h2>
-<h1 class="text-center">********************************************************************************************</h1>
-<table>
-    <tr>
-        {% for image in images_hair %}
-        <td><img src="{{image}}" alt="connect" style="max-height:400px"></td>
-            {% if forloop.counter|divisibleby:3 %}
-            </tr><tr>
-            {% endif %}
-        {% endfor %}
-    </tr>
-</table>
-<h1 class="text-center">********************************************************************************************</h1>
+<link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+<div class="portfolio-page">
+    <h1 class="portfolio-title">Моё портфолио</h1>
 
-<h1 class="text-center">Маникюр, дизайн ногтей</h1>
-
-<h1 class="text-center">********************************************************************************************</h1>
-<table>
-    <tr>
-        {% for image in images_manic %}
-        <td><img src="{{image}}" alt="connect" style="max-height:300px"></td>
-            {% if forloop.counter|divisibleby:3 %}
-            </tr><tr>
+    <div class="portfolio-columns">
+        <section class="portfolio-section">
+            <h2 class="portfolio-section__title">Парикмахерские услуги</h2>
+            {% if images_hair %}
+            <div class="portfolio-grid">
+                {% for image in images_hair %}
+                <article class="portfolio-card" {% if image.id %}id="portfolio-image-{{ image.id }}"{% endif %}>
+                    <a href="{{ image.url }}" onclick="openLightbox(this.href); return false;">
+                        <img src="{{ image.url }}" alt="Работа парикмахера" loading="lazy">
+                    </a>
+                    {% if image.id %}
+                    <div class="portfolio-reactions">
+                        <form method="post" action="{% url 'catalog:portfolio_like' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'like' %}is-active{% endif %}">
+                                ♥ <span>{{ image.likes }}</span>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'catalog:portfolio_dislike' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'dislike' %}is-active{% endif %}">
+                                ✕ <span>{{ image.dislikes }}</span>
+                            </button>
+                        </form>
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="portfolio-reaction-login">Войдите, чтобы оценить</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="portfolio-empty">Фотографии пока не добавлены.</p>
             {% endif %}
-        {% endfor %}
-    </tr>
-</table>
-<button><a href="{% url 'port' %}">Наверх</a></button>
-{% endblock %}
-{% block footer %}
-     {{ block.super }}
+        </section>
+
+        <section class="portfolio-section">
+            <h2 class="portfolio-section__title">Маникюр</h2>
+            {% if images_manicure %}
+            <div class="portfolio-grid">
+                {% for image in images_manicure %}
+                <article class="portfolio-card" {% if image.id %}id="portfolio-image-{{ image.id }}"{% endif %}>
+                    <a href="{{ image.url }}" onclick="openLightbox(this.href); return false;">
+                        <img src="{{ image.url }}" alt="Работа мастера маникюра" loading="lazy">
+                    </a>
+                    {% if image.id %}
+                    <div class="portfolio-reactions">
+                        <form method="post" action="{% url 'catalog:portfolio_like' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'like' %}is-active{% endif %}">
+                                ♥ <span>{{ image.likes }}</span>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'catalog:portfolio_dislike' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'dislike' %}is-active{% endif %}">
+                                ✕ <span>{{ image.dislikes }}</span>
+                            </button>
+                        </form>
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="portfolio-reaction-login">Войдите, чтобы оценить</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="portfolio-empty">Фотографии пока не добавлены.</p>
+            {% endif %}
+        </section>
+
+        <section class="portfolio-section">
+            <h2 class="portfolio-section__title">Педикюр</h2>
+            {% if images_pedicure %}
+            <div class="portfolio-grid">
+                {% for image in images_pedicure %}
+                <article class="portfolio-card" {% if image.id %}id="portfolio-image-{{ image.id }}"{% endif %}>
+                    <a href="{{ image.url }}" onclick="openLightbox(this.href); return false;">
+                        <img src="{{ image.url }}" alt="Работа мастера педикюра" loading="lazy">
+                    </a>
+                    {% if image.id %}
+                    <div class="portfolio-reactions">
+                        <form method="post" action="{% url 'catalog:portfolio_like' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'like' %}is-active{% endif %}">
+                                ♥ <span>{{ image.likes }}</span>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'catalog:portfolio_dislike' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'dislike' %}is-active{% endif %}">
+                                ✕ <span>{{ image.dislikes }}</span>
+                            </button>
+                        </form>
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="portfolio-reaction-login">Войдите, чтобы оценить</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="portfolio-empty">Фотографии пока не добавлены.</p>
+            {% endif %}
+        </section>
+
+        <section class="portfolio-section">
+            <h2 class="portfolio-section__title">Брови и ресницы</h2>
+            {% if images_brows %}
+            <div class="portfolio-grid">
+                {% for image in images_brows %}
+                <article class="portfolio-card" {% if image.id %}id="portfolio-image-{{ image.id }}"{% endif %}>
+                    <a href="{{ image.url }}" onclick="openLightbox(this.href); return false;">
+                        <img src="{{ image.url }}" alt="Работа мастера бровей" loading="lazy">
+                    </a>
+                    {% if image.id %}
+                    <div class="portfolio-reactions">
+                        <form method="post" action="{% url 'catalog:portfolio_like' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'like' %}is-active{% endif %}">
+                                ♥ <span>{{ image.likes }}</span>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'catalog:portfolio_dislike' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'dislike' %}is-active{% endif %}">
+                                ✕ <span>{{ image.dislikes }}</span>
+                            </button>
+                        </form>
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="portfolio-reaction-login">Войдите, чтобы оценить</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="portfolio-empty">Фотографии пока не добавлены.</p>
+            {% endif %}
+        </section>
+
+        <section class="portfolio-section">
+            <h2 class="portfolio-section__title">Другое</h2>
+            {% if images_other %}
+            <div class="portfolio-grid">
+                {% for image in images_other %}
+                <article class="portfolio-card" {% if image.id %}id="portfolio-image-{{ image.id }}"{% endif %}>
+                    <a href="{{ image.url }}" onclick="openLightbox(this.href); return false;">
+                        <img src="{{ image.url }}" alt="Работа мастера" loading="lazy">
+                    </a>
+                    {% if image.id %}
+                    <div class="portfolio-reactions">
+                        <form method="post" action="{% url 'catalog:portfolio_like' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'like' %}is-active{% endif %}">
+                                ♥ <span>{{ image.likes }}</span>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'catalog:portfolio_dislike' image.id %}" class="portfolio-reaction-form">
+                            {% csrf_token %}
+                            <button type="submit" class="portfolio-reaction-button {% if image.user_reaction == 'dislike' %}is-active{% endif %}">
+                                ✕ <span>{{ image.dislikes }}</span>
+                            </button>
+                        </form>
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="portfolio-reaction-login">Войдите, чтобы оценить</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="portfolio-empty">Фотографии пока не добавлены.</p>
+            {% endif %}
+        </section>
+    </div>
+
+    <a href="#" class="portfolio-top-button" aria-label="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+    <div id="portfolioLightbox" class="portfolio-lightbox" onclick="if(event.target===this) closeLightbox();">
+        <button type="button" class="portfolio-lightbox__close" onclick="closeLightbox()" aria-label="Закрыть">×</button>
+        <button type="button" class="portfolio-lightbox__nav portfolio-lightbox__nav--prev" onclick="showLightboxImage(currentIndex-1)" aria-label="Предыдущее">‹</button>
+        <img id="portfolioLightboxImage" src="" alt="Увеличенное фото">
+        <button type="button" class="portfolio-lightbox__nav portfolio-lightbox__nav--next" onclick="showLightboxImage(currentIndex+1)" aria-label="Следующее">›</button>
+    </div>
+
+    <script>
+        const lightboxImages = Array.from(document.querySelectorAll('.portfolio-card a')).map(a => a.getAttribute('href'));
+        let currentIndex = 0;
+        function openLightbox(src) {
+            currentIndex = lightboxImages.indexOf(src);
+            if (currentIndex < 0) currentIndex = 0;
+            showLightboxImage(currentIndex);
+            document.getElementById('portfolioLightbox').classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function showLightboxImage(index) {
+            if (!lightboxImages.length) return;
+            if (index < 0) index = lightboxImages.length - 1;
+            if (index >= lightboxImages.length) index = 0;
+            currentIndex = index;
+            document.getElementById('portfolioLightboxImage').src = lightboxImages[currentIndex];
+        }
+        function closeLightbox() {
+            document.getElementById('portfolioLightbox').classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            const lb = document.getElementById('portfolioLightbox');
+            if (!lb.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showLightboxImage(currentIndex - 1);
+            if (e.key === 'ArrowRight') showLightboxImage(currentIndex + 1);
+        });
+    </script>
+</div>
 {% endblock %}

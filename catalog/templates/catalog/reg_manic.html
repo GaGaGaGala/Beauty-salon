@@ -1,14 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Registration for manicure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на маникюр</title>
+    <link rel="stylesheet" href="{% static 'css/service-selection.css' %}">
 </head>
 <body>
-     <ul>
-        {% for i in list_man %}
-            <li><p>{{ i }} --<button><a href="/catalog/">выбрать</a></button></p></li>
-        {% endfor %}
-    </ul>
+<div class="service-page">
+    <div class="service-bloom" aria-hidden="true"></div>
+    <div class="service-container">
+        <div class="service-panel">
+
+            <h1 class="service-title">Выберите услугу маникюра</h1>
+
+            <ul class="service-list">
+              {% for service in services %}
+                <li class="service-row">
+                  <span class="service-row__name">{{ service.title }}</span>
+                  <div class="service-row__meta">
+                    <span class="service-row__price">{{ service.price }} руб.</span>
+                    <span class="service-row__duration">{{ service.duration_minutes }} мин.</span>
+                    <a class="service-choose-link" href="{% url 'catalog:booking_create' %}?service={{ service.id }}"><button type="button" class="service-choose">Выбрать</button></a>
+                  </div>
+                </li>
+              {% empty %}
+                <li class="service-empty">Услуги пока не добавлены.</li>
+              {% endfor %}
+            </ul>
+
+            <div class="service-back-wrap">
+              <a class="service-back" href="/catalog/free_win/">Выбрать другую процедуру</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
+       

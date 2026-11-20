@@ -1,22 +1,128 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Регистрация{{block.super }}{% endblock %}
-
-{% block header %}
-    {{ block.super }}
-{% endblock %}
-
-{% block navigation %}
-    {{ block.super }}
-{% endblock %}
+{% block title %}Регистрация | Мой салон красоты{% endblock %}
 
 {% block content %}
-    <h1>Регистрация</h1>
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <a href="/catalog/portfolio"><button>Зарегистрироваться</button></a>
-    </form>
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+
+<div class="client-page">
+    <img class="client-hero"
+         src="{% static 'images/auth-salon.png' %}"
+         alt="Регистрация в салоне красоты">
+
+    <div class="client-container">
+        <div class="client-card">
+
+            <h1 class="client-title">Регистрация</h1>
+
+            <form method="post" id="signup-form" class="client-form profile-form" autocomplete="off">
+                {% csrf_token %}
+
+                {{ form.non_field_errors }}
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="id_last_name">Фамилия</label>
+                        {{ form.last_name }}
+                        {{ form.last_name.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_first_name">Имя</label>
+                        {{ form.first_name }}
+                        {{ form.first_name.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_patronymic">Отчество</label>
+                        {{ form.patronymic }}
+                        {{ form.patronymic.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_phone">Номер телефона</label>
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">Электронная почта (необязательно)</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label class="form-label">Способ создания логина</label>
+                        {{ form.login_type }}
+                        {{ form.login_type.errors }}
+                    </div>
+                    <div class="form-group" id="username-block" style="grid-column: 1 / -1;">
+                        <label for="id_username">Логин</label>
+                        {{ form.username }}
+                        <div class="form-text">Если выбрано «Создать автоматически», логин будет сформирован системой.</div>
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="id_district">Район проживания или обслуживания</label>
+                        {{ form.district }}
+                        {{ form.district.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password1">Пароль</label>
+                        {{ form.password1 }}
+                        {{ form.password1.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password2">Повтор пароля</label>
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                    </div>
+                </div>
+
+                {% if form.errors %}
+                <div class="alert alert-danger">{{ form.errors }}</div>
+                {% endif %}
+
+                <button type="submit" class="client-button">Зарегистрироваться</button>
+            </form>
+
+            <p class="client-text" style="margin-top: 18px; text-align: center;">
+                Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    var radios = document.querySelectorAll('input[name="login_type"]');
+    var block = document.getElementById('username-block');
+    var input = document.getElementById('id_username');
+    function update() {
+        var manual = false;
+        radios.forEach(function(r){ if (r.checked && r.value === 'manual') manual = true; });
+        if (manual) {
+            block.style.display = '';
+            input.required = true;
+        } else {
+            block.style.display = 'none';
+            input.required = false;
+            input.value = '';
+        }
+    }
+    radios.forEach(function(r){ r.addEventListener('change', update); });
+    update();
+
+    var district = document.getElementById('id_district');
+    if (district) {
+        district.setAttribute('autocomplete', 'off');
+        district.setAttribute('autocorrect', 'off');
+        district.setAttribute('autocapitalize', 'off');
+        district.setAttribute('spellcheck', 'false');
+        district.setAttribute('readonly', 'readonly');
+        district.value = '';
+        district.addEventListener('focus', function() { this.removeAttribute('readonly'); });
+        district.addEventListener('blur', function() { this.setAttribute('readonly', 'readonly'); });
+    }
+})();
+</script>
 {% endblock %}
 
 {% block footer %}

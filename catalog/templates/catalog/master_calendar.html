@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Календарь мастера</h1>
+
+<div style="margin-bottom:1rem;">
+  <a href="?year={{ prev_year }}&month={{ prev_month }}">← Предыдущий месяц</a>
+  &nbsp;|&nbsp;
+  <strong>{{ month_name }}</strong>
+  &nbsp;|&nbsp;
+  <a href="?year={{ next_year }}&month={{ next_month }}">Следующий месяц →</a>
+</div>
+
+<h2>Настройки цикла «сутки через трое»</h2>
+<form method="post" style="margin-bottom:1rem;">
+  {% csrf_token %}
+  <input type="hidden" name="action" value="autogen">
+  <label>Дата первой смены в диспетчерской: <input type="date" name="auto_start_date" value="{% if calendar_settings.dispatch_cycle_start %}{{ calendar_settings.dispatch_cycle_start|date:'Y-m-d' }}{% else %}{{ today|date:'Y-m-d' }}{% endif %}" required></label>
+  <label>Длина цикла: <input type="number" name="cycle_length" value="{{ calendar_settings.dispatch_cycle_length|default:4 }}" min="2" max="14" required></label>
+  <button type="submit">Сохранить цикл</button>
+</form>
+<p><small>Дата первой смены считается закрытым днём для салона. Следующие {{ calendar_settings.dispatch_cycle_length|default:4|add:"-1" }} дня доступны с учётом тренировок и ограничений.</small></p>
+
+<h2>Повторяющаяся занятость (тренировки и др.)</h2>
+<form method="post" style="margin-bottom:1rem;">
+  {% csrf_token %}
+  <input type="hidden" name="action" value="add_busy">
+  {{ busy_form.as_p }}
+  <button type="submit">Добавить</button>
+</form>
+<table border="1" cellpadding="5" style="margin-bottom:1rem;">
+<tr><th>День</th><th>Время</th><th>Буферы</th><th>Активно</th><th></th></tr>
+{% for b in recurring_busy %}
+<tr>
+<td>{{ b.get_weekday_display }}</td>
+<td>{{ b.start_time }} — {{ b.end_time }}</td>
+<td>{{ b.buffer_before_minutes }} / {{ b.buffer_after_minutes }} мин</td>
+<td>{% if b.is_active %}Да{% else %}Нет{% endif %}</td>
+<td>
+  <form method="post" style="display:inline;">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="delete_busy">
+    <input type="hidden" name="busy_id" value="{{ b.id }}">
+    <button type="submit">Удалить</button>
+  </form>
+</td>
+</tr>
+{% empty %}<tr><td colspan="5">Нет повторяющейся занятости</td></tr>{% endfor %}
+</table>
+
+<h2>Ручное изменение дня</h2>
+<form method="post" style="margin-bottom:1rem;">
+  {% csrf_token %}
+  <input type="hidden" name="action" value="set_day">
+  {{ exception_form.as_p }}
+  <button type="submit">Сохранить день</button>
+</form>
+
+<h2>Точка отправления на дату</h2>
+<form method="post" style="margin-bottom:1rem;">
+  {% csrf_token %}
+  <input type="hidden" name="action" value="set_dayplan">
+  {{ dayplan_form.as_p }}
+  <button type="submit">Сохранить точку отправления</button>
+</form>
+
+<h2>Легенда</h2>
+<p>
+<span style="background:#ffebee;padding:2px 6px;">Смена диспетчерской / закрыто</span>
+<span style="background:#e8f5e9;padding:2px 6px;">Доступный день</span>
+<span style="background:#fff9c4;padding:2px 6px;">Частичная занятость</span>
+<span style="background:#e3f2fd;padding:2px 6px;">Есть записи</span>
+</p>
+
+<table border="1" cellpadding="5" style="width:100%; text-align:center;">
+  <tr>
+    <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th>
+  </tr>
+  {% for week in weeks %}
+  <tr>
+    {% for day in week %}
+      {% if day %}
+        <td style="vertical-align:top; 
+          {% if day.status == 'duty' %}background:#ffebee;
+          {% elif day.bookings %}background:#e3f2fd;
+          {% elif day.status == 'working' %}background:#e8f5e9;
+          {% else %}background:#ffebee;{% endif %}">
+          <strong>{{ day.day }}</strong><br>
+          {% if day.status == 'duty' %}<span style="color:#c62828;">Смена</span>
+          {% elif day.status == 'working' %}<span style="color:green;">Рабочий</span>
+          {% else %}<span style="color:red;">Выходной</span>{% endif %}<br>
+          {% if day.exception %}<small>{{ day.exception.reason }}</small><br>{% endif %}
+          {% if day.bookings %}<small>Записей: {{ day.bookings }}</small><br>{% endif %}
+          {% for e in day.events %}<small>{{ e.title }}</small><br>{% endfor %}
+        </td>
+      {% else %}
+        <td></td>
+      {% endif %}
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Записи клиентов (текущие)</h2>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Дата/время</th><th>Район</th><th>Статус</th></tr>
+{% for b in client_bookings %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{% if b.confirmed_start %}{{ b.confirmed_start }}{% else %}{{ b.desired_datetime }}{% endif %}</td>
+<td>{{ b.client_district }}</td>
+<td>{{ b.get_status_display }}</td>
+</tr>
+{% empty %}<tr><td colspan="5">Записей нет</td></tr>{% endfor %}
+</table>
+
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

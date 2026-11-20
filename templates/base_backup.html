@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мой салон красоты{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="{% static 'js/script.js' %}"></script>
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            padding: 14px 16px;
+        }
+        .navbar a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block header %}
+            <h1 class="text-center">Добро пожаловать в мой интернет-салон красоты!</h1>
+            <img class="w-50 mx-auto d-block" src="{% static 'img/example.png' %}" alt="photo">
+        {% endblock %}
+    </div>
+    <div class="navbar">
+        {% block navigation %}
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'catalog:list_of_services' %}">Мои услуги</a>
+        <a href="{% url 'catalog:price_list' %}">Прайс-лист</a>
+        <a href="{% url 'catalog:port' %}">Портфолио</a>
+        <a href="{% url 'catalog:about' %}">О себе</a>
+        <a href="{% url 'catalog:free_window' %}">Записаться на процедуру</a>
+        <a href="{% url 'catalog:reviews' %}">Отзывы</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'catalog:my_bookings' %}">Личный кабинет</a>
+        {% if user.is_staff or user.is_superuser %}
+        <a href="{% url 'catalog:master_dashboard' %}">Кабинет мастера</a>
+        {% endif %}
+        <a href="{% url 'logout' %}">Выход</a>
+        {% else %}
+        <a href="{% url 'catalog:my_bookings' %}">Личный кабинет</a>
+        <a href="{% url 'login' %}">Авторизация</a>
+        <a href="{% url 'signup' %}">Регистрация</a>
+        {% endif %}
+        <p style="float: right; color: #f2f2f2">{{ user.username }} <br></p>
+        {% endblock %}
+
+    </div>
+    {% if messages %}
+    <div class="container mt-2">
+        {% for message in messages %}
+        <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <main>
+        {% block content %}
+        ---------------------------------
+        {% endblock %}
+    </main>
+    <footer class="bg-light text-center">
+        <p>kosachevagalina@gmail.com, 2025, Интернет-салон красоты</p>
+    </footer>
+</body>
+</html>
+
+

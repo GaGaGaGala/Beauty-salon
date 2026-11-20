@@ -1,27 +1,341 @@
-{% extends "base.html" %}
 
-{% block title %}Педикюр{{block.super }}{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Педикюр | Мой салон красоты{% endblock %}
 
 {% block header %}
 {% endblock %}
 
-{% block navigation %}
-    {{ block.super }}
+{% block content %}
+
+<style>
+.pedicure-page {
+    background: #F9F5F1;
+    color: #514342;
+    padding-bottom: 55px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.pedicure-container {
+    width: min(1120px, 92%);
+    margin: 0 auto;
+}
+
+.pedicure-hero {
+    text-align: center;
+    padding: 45px 0 30px;
+}
+
+.pedicure-hero h1 {
+    color: #793E4D;
+    font-size: clamp(30px, 4vw, 44px);
+    margin-bottom: 18px;
+}
+
+.pedicure-lead {
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.pedicure-section {
+    padding: 35px 0;
+}
+
+.pedicure-section h2 {
+    color: #793E4D;
+    font-size: 28px;
+    margin-bottom: 18px;
+}
+
+.pedicure-section p,
+.pedicure-section li {
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.pedicure-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.pedicure-gallery img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(80, 50, 50, 0.12);
+    transition: transform 0.25s ease;
+}
+
+.pedicure-gallery img:hover {
+    transform: translateY(-4px);
+}
+
+.pedicure-highlight {
+    background: #F2E9E2;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 25px 0;
+}
+
+.pedicure-highlight h2 {
+    color: #793E4D;
+}
+
+.pedicure-booking {
+    text-align: center;
+    padding: 45px 20px;
+    background: #EAD8D5;
+    border-radius: 22px;
+    margin-top: 35px;
+}
+
+.pedicure-booking h2 {
+    color: #793E4D;
+}
+
+.pedicure-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 14px 32px;
+    background: #793E4D;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 17px;
+    transition: background 0.2s ease;
+}
+
+.pedicure-button:hover {
+    background: #5F303D;
+    color: white;
+}
+
+@media (max-width: 750px) {
+    .pedicure-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .pedicure-gallery img {
+        height: 210px;
+    }
+
+    .pedicure-highlight {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 450px) {
+    .pedicure-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .pedicure-gallery img {
+        height: auto;
+        max-height: 380px;
+    }
+}
+    /* Общая кнопка возврата к услугам */
+    .beauty-button {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .beauty-button.beauty-button--secondary {
+        background: #ead8d5;
+        color: #793e4d;
+    }
+
+    .beauty-button--secondary {
+        text-decoration: none !important;
+    }
+
+    .beauty-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+    .beauty-button--secondary:hover {
+        background: #e2c9c7;
+        color: #793e4d;
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="pedicure-page">
+
+    <!-- Главный заголовок -->
+    <section class="pedicure-hero">
+        <div class="pedicure-container">
+            <h1>Педикюр — забота о красоте и комфорте</h1>
+
+            <p class="pedicure-lead">
+                Ухоженные ножки — важная деталь образа в любое время года.
+                Предлагаю профессиональную обработку стоп и ногтей,
+                разные техники педикюра, покрытие и моделирование ногтей.
+                Подберём подходящую процедуру с учётом ваших пожеланий.
+            </p>
+        </div>
+    </section>
+
+    <!-- Виды педикюра -->
+    <section class="pedicure-section">
+        <div class="pedicure-container">
+
+            <h2>Виды педикюра</h2>
+
+            <p>
+                Можно выбрать классический обрезной, аппаратный
+                или комбинированный педикюр. При классической технике
+                стопы предварительно размягчаются, после чего
+                выполняется обработка ногтей и кутикулы.
+            </p>
+
+            <p>
+                При аппаратном педикюре используются специальные
+                насадки. В комбинированной технике сочетаются
+                обработка аппаратом и шлифовка стопы специальными
+                одноразовыми файлами.
+            </p>
+
+            <div class="pedicure-gallery">
+                <img src="{% static 'img/ex11.png' %}"
+                     alt="Педикюр с покрытием">
+
+                <img src="{% static 'img/ex12.png' %}"
+                     alt="Ухоженные ногти на ногах">
+
+                <img src="{% static 'img/ex13.png' %}"
+                     alt="Обработка стоп при педикюре">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Смарт-педикюр -->
+    <section class="pedicure-section">
+        <div class="pedicure-container">
+
+            <div class="pedicure-highlight">
+                <h2>Смарт-педикюр — современная обработка стоп</h2>
+
+                <p>
+                    Смарт-педикюр выполняется с помощью специальных
+                    дисков с одноразовыми сменными файлами.
+                    Такая техника позволяет тщательно обработать
+                    поверхность стоп и сделать её гладкой и ухоженной.
+                </p>
+
+                <p>
+                    В зависимости от состояния стоп и ваших пожеланий
+                    подбираются подходящие насадки и абразивность.
+                </p>
+            </div>
+
+            <div class="pedicure-gallery">
+                <img src="{% static 'img/services/pedicure/pedicure-smart.png' %}"
+                     alt="Смарт-педикюр">
+
+                <img src="{% static 'img/services/pedicure/pedicure-care.png' %}"
+                     alt="Уход и обработка стоп">
+
+                <img src="{% static 'img/ex14.png' %}"
+                     alt="Профессиональная обработка стоп">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Покрытие и моделирование -->
+    <section class="pedicure-section">
+        <div class="pedicure-container">
+
+            <h2>Покрытие и моделирование ногтей</h2>
+
+            <p>
+                После обработки можно оставить ногти без покрытия,
+                нанести обычный лак или выбрать гель-лак.
+                Оттенок и оформление подбираются по вашему вкусу.
+            </p>
+
+            <p>
+                Если ноготь повреждён, сломан или не хватает
+                его части, при необходимости можно восстановить
+                недостающий фрагмент и смоделировать аккуратную форму
+                с помощью подходящего материала.
+            </p>
+
+            <p>
+                Для тонких и ломких ногтей также можно подобрать
+                дополнительное укрепление. Технику и материал
+                выбираем индивидуально.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- Завершение процедуры -->
+    <section class="pedicure-section">
+        <div class="pedicure-container">
+
+            <div class="pedicure-highlight">
+                <h2>Завершающий уход</h2>
+
+                <p>
+                    В завершение процедуры наносится крем для ног,
+                    выполняется лёгкий массаж. Это приятный финальный
+                    штрих, который дарит ощущение ухоженности и комфорта.
+                </p>
+
+                <p>
+                    Вы можете выбрать полный педикюр с обработкой стоп
+                    и покрытием или только обработку ногтей и пальчиков —
+                    всё зависит от ваших пожеланий.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Запись -->
+    <section class="pedicure-container">
+        <div class="pedicure-booking">
+
+            <h2>Подарите своим ножкам заботу!</h2>
+
+            <p>
+                Выберите подходящий вариант педикюра,
+                а я помогу подобрать процедуру с учётом
+                ваших пожеланий.
+            </p>
+
+            <a href="{% url 'catalog:free_window' %}"
+               class="pedicure-button">
+                Записаться на педикюр
+            </a>
+            <a href="{% url 'catalog:list_of_services' %}"
+               class="beauty-button beauty-button--secondary">
+                Вернуться к моим услугам
+            </a>
+
+        </div>
+    </section>
+
+</div>
+
 {% endblock %}
 
-{% block content %}
-    <h1 class="text-center">Педикюр</h1>
-    <p class="photo"><img src="/static/img/ex11.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Обрезной или аппаратный - зависит от ваших пожеланий.</p>
-    <p class="photo"><img src="/static/img/ex12.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Обрезаем длину, оформляем форму ногтей, удаляем кутикулу.</p>
-    <p>Обрабатываем стопу тёркой с одноразовыми файлами, шлифуем аппаратом.</p>
-    <p class="photo"><img src="/static/img/ex13.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Можно нанести лак на ногти или покрыть гель-лаком.</p>
-    <p>Крем для ног с лёгким массажем придаёт ножкам законченный вид и доставляет удовольствие клиенту.</p>
-    <p class="photo"><img src="/static/img/ex14.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p><a href="/catalog/list_of_services">Назад</a></p>
-{% endblock %}
 {% block footer %}
-     {{ block.super }}
+    {{ block.super }}
 {% endblock %}

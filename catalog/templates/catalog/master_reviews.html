@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Отзывы</h1>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Оценка</th><th>Текст</th><th>Фото</th><th>Статус</th><th></th></tr>
+{% for r in reviews %}
+<tr>
+<td>{{ r.client.username }}</td>
+<td>{{ r.service }}</td>
+<td>{{ r.rating }}</td>
+<td>{{ r.text }}</td>
+<td>{% if r.photo %}<img src="{{ r.photo.url }}" height="60">{% endif %}</td>
+<td>
+    {% if r.status == 'pending' %}На модерации
+    {% elif r.status == 'published' %}Опубликован
+    {% elif r.status == 'rejected' %}Отклонён
+    {% endif %}
+</td>
+<td>
+    {% if r.status != 'published' %}
+    <a href="{% url 'catalog:master_review_publish' r.id %}">Опубликовать</a><br>
+    {% endif %}
+    {% if r.status != 'rejected' %}
+    <a href="{% url 'catalog:master_review_reject' r.id %}">Отклонить</a><br>
+    {% endif %}
+    {% if r.status != 'pending' %}
+    <a href="{% url 'catalog:master_review_pending' r.id %}">На модерацию</a>
+    {% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Выбор услуги для отзыва{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/client-area.css' %}">
+<div class="client-page">
+    <div class="client-container">
+        <div class="client-card">
+            <h1 class="client-title">Выберите выполненную услугу</h1>
+            <p class="client-text">Для какой записи вы хотите оставить отзыв?</p>
+            <ul>
+                {% for b in bookings %}
+                <li style="margin: 10px 0;">
+                    {{ b.service.title }} — {{ b.confirmed_start|default:b.desired_datetime }}
+                    <a class="client-button" href="{% url 'catalog:booking_review' b.id %}">Оставить отзыв</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <p style="margin-top: 18px;">
+                <a class="client-button client-button--ghost" href="{% url 'catalog:reviews' %}">К отзывам</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

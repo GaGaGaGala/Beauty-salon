@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Кабинет мастера</h1>
+<h2>Новые заявки</h2>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Желаемое время</th><th>Район</th><th>Действия</th></tr>
+{% for b in pending %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{{ b.desired_datetime }}</td>
+<td>{{ b.client_district }}</td>
+<td><a href="{% url 'catalog:master_booking_detail' b.id %}">Обработать</a></td>
+</tr>
+{% empty %}<tr><td colspan="5">Нет новых заявок</td></tr>{% endfor %}
+</table>
+<h2>Предложено другое время</h2>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Предложенное время</th><th>Действия</th></tr>
+{% for b in proposed %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{{ b.confirmed_start }} - {{ b.confirmed_end }}</td>
+<td><a href="{% url 'catalog:master_booking_detail' b.id %}">Изменить</a></td>
+</tr>
+{% empty %}<tr><td colspan="4">Нет предложений</td></tr>{% endfor %}
+</table>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Начало</th><th>Окончание</th><th>Действия</th></tr>
+{% for b in confirmed %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{{ b.confirmed_start }}</td>
+<td>{{ b.confirmed_end }}</td>
+<td>
+<a href="{% url 'catalog:master_booking_detail' b.id %}">Изменить</a>
+<a href="{% url 'catalog:master_booking_complete' b.id %}">Выполнена</a>
+</td>
+</tr>
+{% empty %}<tr><td colspan="5">Нет записей</td></tr>{% endfor %}
+</table>
+<h2>Отклонённые</h2>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Статус</th></tr>
+{% for b in rejected %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{{ b.get_status_display }}</td>
+</tr>
+{% empty %}<tr><td colspan="3">Нет отклонённых</td></tr>{% endfor %}
+</table>
+<h2>Отменённые</h2>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Статус</th></tr>
+{% for b in cancelled %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{{ b.get_status_display }}</td>
+</tr>
+{% empty %}<tr><td colspan="3">Нет отменённых</td></tr>{% endfor %}
+</table>
+<h2>Выполненные</h2>
+<table border="1" cellpadding="5">
+<tr><th>Клиент</th><th>Услуга</th><th>Статус</th></tr>
+{% for b in completed %}
+<tr>
+<td>{{ b.client.username }}</td>
+<td>{{ b.service.title }}</td>
+<td>{{ b.get_status_display }}</td>
+</tr>
+{% empty %}<tr><td colspan="3">Нет выполненных</td></tr>{% endfor %}
+</table>
+<p>
+<a href="{% url 'catalog:master_clients' %}">Клиенты</a> |
+<a href="{% url 'catalog:master_services' %}">Услуги</a> |
+<a href="{% url 'catalog:master_calendar' %}">Календарь</a> |
+<a href="{% url 'catalog:master_reviews' %}">Отзывы</a> |
+<a href="{% url 'catalog:master_portfolio' %}">Портфолио</a>
+</p>
+{% endblock %}

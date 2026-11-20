@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Портфолио</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Добавить</button>
+</form>
+<table border="1" cellpadding="5">
+<tr><th>Изображение</th><th>Название</th><th>Категория</th><th>Опубликовано</th><th></th></tr>
+{% for img in images %}
+<tr>
+<td><img src="{{ img.image.url }}" height="60"></td>
+<td>{{ img.title }}</td>
+<td>{{ img.get_category_display }}</td>
+<td>{{ img.is_published }}</td>
+<td><a href="{% url 'catalog:master_portfolio_delete' img.id %}">Удалить</a></td>
+</tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'catalog:master_dashboard' %}">Назад в кабинет мастера</a></p>
+{% endblock %}

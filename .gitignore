@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django
+*.sqlite3
+*.sqlite3-*
+db.sqlite3
+db.sqlite3.backup*
+staticfiles/
+
+# Secrets and local settings
+.env
+.env.*
+*.secret
+local_settings.py
+
+# Backups and temporary files
+backup/
+*.bak
+*.backup
+*.tmp
+*.log
+auth_test_result.txt
+test_output.txt
+single_test.txt
+signup_rendered.html
+fix_views.py
+generate_banner.py
+tmp_query.py
+
+# Editor/OS
+.DS_Store
+Thumbs.db

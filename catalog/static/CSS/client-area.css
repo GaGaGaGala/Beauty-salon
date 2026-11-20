@@ -1,0 +1,274 @@
+/* =====================================
+   BEAUTY SALON — личный кабинет и новая заявка
+   ===================================== */
+
+:root {
+    --ca-milk: #F9F5F1;
+    --ca-cream: #F2E9E2;
+    --ca-powder: #EAD8D5;
+    --ca-rose: #C69A9D;
+    --ca-burgundy: #793E4D;
+    --ca-burgundy-dark: #5F303D;
+    --ca-text: #514342;
+    --ca-muted: #827472;
+    --ca-white: #FFFFFF;
+}
+
+.client-page {
+    padding: 0 0 60px;
+    color: var(--ca-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, var(--ca-milk) 0%, var(--ca-cream) 100%);
+    min-height: 60vh;
+}
+
+/* Широкое адаптивное фото интерьера */
+.client-hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    margin-bottom: 32px;
+}
+
+.client-container {
+    width: min(1100px, 94%);
+    margin: 0 auto;
+}
+
+.client-card {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 26px;
+    box-shadow: 0 18px 45px rgba(92, 55, 55, 0.12);
+    padding: 36px 34px 30px;
+}
+
+.client-title {
+    color: var(--ca-burgundy);
+    font-family: Georgia, serif;
+    font-size: clamp(26px, 3.6vw, 38px);
+    font-weight: 400;
+    margin: 0 0 22px;
+    text-align: center;
+}
+
+.client-subtitle {
+    color: var(--ca-text);
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 28px 0 12px;
+}
+
+.client-text {
+    color: var(--ca-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 18px;
+}
+
+/* Форма */
+.client-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.client-date-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 100%;
+}
+
+.form-group label {
+    color: var(--ca-text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-control,
+.client-form input[type="date"],
+.client-form input[type="text"],
+.client-form input[type="datetime-local"],
+.client-form select,
+.client-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(198, 154, 157, 0.45);
+    border-radius: 12px;
+    background: var(--ca-white);
+    color: var(--ca-text);
+    font-size: 15px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.client-form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.client-form .errorlist {
+    color: #b00020;
+    font-size: 13px;
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+}
+
+/* Кнопки */
+.client-button {
+    display: inline-block;
+    padding: 11px 24px;
+    background: var(--ca-burgundy);
+    color: var(--ca-white);
+    border: 1px solid var(--ca-burgundy);
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s ease;
+}
+
+.client-button:hover {
+    background: var(--ca-burgundy-dark);
+    border-color: var(--ca-burgundy-dark);
+    color: var(--ca-white);
+    transform: translateY(-2px);
+}
+
+.client-button--ghost {
+    background: transparent;
+    color: var(--ca-burgundy);
+}
+
+/* Слоты */
+.slot-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.slot-list li {
+    padding: 6px 12px;
+    border-radius: 12px;
+    background: var(--ca-powder);
+    color: var(--ca-text);
+    font-size: 14px;
+}
+
+/* Таблицы */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 12px 0 24px;
+}
+
+.client-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 720px;
+}
+
+.client-table th,
+.client-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(198, 154, 157, 0.25);
+    text-align: left;
+    vertical-align: top;
+}
+
+.client-table th {
+    color: var(--ca-burgundy);
+    font-weight: 600;
+    background: rgba(234, 216, 213, 0.35);
+    white-space: nowrap;
+}
+
+.client-table tr:hover td {
+    background: rgba(249, 245, 241, 0.6);
+}
+
+.client-table a {
+    color: var(--ca-burgundy);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.client-table a:hover {
+    text-decoration: underline;
+}
+
+.client-empty {
+    text-align: center;
+    color: var(--ca-muted);
+    padding: 18px;
+}
+
+/* Список данных клиента */
+.client-data-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+}
+
+.client-data-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(198, 154, 157, 0.18);
+}
+
+.client-data-list li:last-child {
+    border-bottom: none;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .client-card {
+        padding: 26px 18px 22px;
+        border-radius: 20px;
+    }
+
+    .client-date-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .client-button {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .client-table {
+        font-size: 13px;
+        min-width: 640px;
+    }
+}
+
+@media (max-width: 520px) {
+    .client-hero {
+        max-height: 260px;
+        margin-bottom: 20px;
+    }
+
+    .client-title {
+        font-size: 24px;
+    }
+}

@@ -1,32 +1,322 @@
-{% extends "base.html" %}
 
-{% block title %}Маникюр{{block.super }}{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Маникюр | Мой салон красоты{% endblock %}
 
 {% block header %}
-
-{% endblock %}
-
-{% block navigation %}
-    {{ block.super }}
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Маникюр</h1>
-    <p>Ухоженные ручки - это лицо женщины.Красивый маникюр делает нас уверенней.Я предлагаю
-    вам все виды маникюра: от простой обработки натуральных ногтей до наращивания гелем со
-    сложным дизайном.</p>
-    <p>Выбираем форму ногтей.</p>
-    <p class="photo"><img src="/static/img/ex9.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p>Обрезной маникюр: определяемся с длинной, придаём форму ногтям,после замачивания рук
-        обрезаем кутикулу, покрываем лаком.</p>
-    <p class="photo"><img src="/static/img/ex10.png" alt="connect" style="max-height:200px, max-width:300"></p>
 
-    <p>При аппаратном маникюре кутикула обрабатывается специальными насадками.Можно покрывать
-    лаком, гель-лаком а также гелем.Всё зависит от ваших привычек и потребностей.</p>
-    <p>На фото ниже  маникюр, гель-лак, ручная роспись.</p>
-    <p class="photo"><img src="/static/img/ex7.png" alt="connect" style="max-height:200px, max-width:300"></p>
-    <p><a href="/catalog/list_of_services">Назад</a></p>
+<style>
+.manicure-page {
+    background: #F9F5F1;
+    color: #514342;
+    padding-bottom: 55px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.manicure-container {
+    width: min(1120px, 92%);
+    margin: 0 auto;
+}
+
+.manicure-hero {
+    text-align: center;
+    padding: 45px 0 30px;
+}
+
+.manicure-hero h1 {
+    color: #793E4D;
+    font-size: clamp(30px, 4vw, 44px);
+    margin-bottom: 18px;
+}
+
+.manicure-lead {
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.manicure-section {
+    padding: 35px 0;
+}
+
+.manicure-section h2 {
+    color: #793E4D;
+    font-size: 28px;
+    margin-bottom: 18px;
+}
+
+.manicure-section p,
+.manicure-section li {
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.manicure-section ul {
+    padding-left: 24px;
+}
+
+.manicure-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.manicure-gallery img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(80, 50, 50, 0.12);
+    transition: transform 0.25s ease;
+}
+
+.manicure-gallery img:hover {
+    transform: translateY(-4px);
+}
+
+.manicure-highlight {
+    background: #F2E9E2;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 25px 0;
+}
+
+.manicure-highlight h2 {
+    color: #793E4D;
+}
+
+.manicure-booking {
+    text-align: center;
+    padding: 45px 20px;
+    background: #EAD8D5;
+    border-radius: 22px;
+    margin-top: 35px;
+}
+
+.manicure-booking h2 {
+    color: #793E4D;
+}
+
+.manicure-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 14px 32px;
+    background: #793E4D;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 17px;
+    transition: background 0.2s ease;
+}
+
+.manicure-button:hover {
+    background: #5F303D;
+    color: white;
+}
+
+@media (max-width: 750px) {
+    .manicure-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .manicure-gallery img {
+        height: 210px;
+    }
+
+    .manicure-highlight {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 450px) {
+    .manicure-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .manicure-gallery img {
+        height: auto;
+        max-height: 380px;
+    }
+}
+    /* Общая кнопка возврата к услугам */
+    .beauty-button {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .beauty-button.beauty-button--secondary {
+        background: #ead8d5;
+        color: #793e4d;
+    }
+
+    .beauty-button--secondary {
+        text-decoration: none !important;
+    }
+
+    .beauty-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+
+    .beauty-button--secondary:hover {
+        background: #e2c9c7;
+        color: #793e4d;
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="manicure-page">
+
+    <section class="manicure-hero">
+        <div class="manicure-container">
+            <h1>Маникюр — красота в каждой детали</h1>
+            <p class="manicure-lead">
+                Ухоженные руки — важная часть образа.
+                Я предлагаю профессиональный маникюр,
+                моделирование и укрепление ногтей,
+                разнообразные покрытия и индивидуальный дизайн.
+                Подберём подходящую процедуру с учётом ваших
+                пожеланий и особенностей ногтей.
+            </p>
+        </div>
+    </section>
+
+    <section class="manicure-section">
+        <div class="manicure-container">
+            <h2>Виды маникюра</h2>
+            <p>
+                Вы можете выбрать классический обрезной,
+                аппаратный, европейский или комбинированный маникюр.
+                Каждый вариант позволяет аккуратно обработать ногти
+                и кутикулу, придав рукам ухоженный вид.
+            </p>
+            <p>
+                При классическом маникюре кутикула предварительно
+                размягчается, затем выполняется её аккуратная обработка.
+                При аппаратной технике используются специальные насадки,
+                а европейский маникюр предполагает деликатную
+                необрезную обработку.
+            </p>
+
+            <div class="manicure-gallery">
+                <img src="{% static 'img/services/manicure/1712383229595_1.jpg' %}"
+                     alt="Маникюр с художественным дизайном">
+                <img src="{% static 'img/services/manicure/IMG_20231024_093636.jpg' %}"
+                     alt="Нежный натуральный маникюр">
+                <img src="{% static 'img/services/manicure/Screenshot_20220311-215457.png' %}"
+                     alt="Французский маникюр">
+            </div>
+        </div>
+    </section>
+
+    <section class="manicure-section">
+        <div class="manicure-container">
+            <h2>Наращивание, укрепление и коррекция</h2>
+            <p>
+                Для тех, кто хочет изменить длину или форму ногтей,
+                предлагаю наращивание гелем и акригелем,
+                а также коррекцию ранее смоделированных ногтей.
+            </p>
+            <p>
+                Если хочется сохранить натуральную длину,
+                можно выбрать укрепление гелем или акригелем.
+                Для коротких ногтей практичным решением часто
+                становится покрытие гель-лаком с дополнительным
+                укреплением акриловой пудрой.
+            </p>
+            <p>
+                Подходящий материал и технику выбираем индивидуально,
+                ориентируясь на длину ногтей и ваши пожелания.
+            </p>
+
+            <div class="manicure-gallery">
+                <img src="{% static 'img/services/manicure/IMG_20220306_021134.jpg' %}"
+                     alt="Маникюр с декоративной росписью">
+                <img src="{% static 'img/services/manicure/IMG_20220523_184538.jpg' %}"
+                     alt="Яркий маникюр с дизайном">
+                <img src="{% static 'img/services/manicure/Screenshot_20220311-221430.png' %}"
+                     alt="Маникюр с художественными элементами">
+            </div>
+        </div>
+    </section>
+
+    <section class="manicure-section">
+        <div class="manicure-container">
+            <h2>Покрытие и дизайн ногтей</h2>
+            <p>
+                Однотонное покрытие, любимые оттенки,
+                выразительные сочетания цветов или оригинальный декор —
+                выбор зависит только от вашего настроения.
+            </p>
+            <p>
+                В работе использую гель-лак, декоративные элементы,
+                стразы, наклейки и другие варианты оформления.
+            </p>
+        </div>
+    </section>
+
+    <section class="manicure-section">
+        <div class="manicure-container">
+            <div class="manicure-highlight">
+                <h2>Художественная роспись — моя особая любовь</h2>
+                <p>
+                    Особенно люблю создавать рисунки вручную.
+                    Цветы, изящные узоры, миниатюрные изображения
+                    и необычные идеи — всё это позволяет сделать
+                    маникюр по-настоящему индивидуальным.
+                </p>
+                <p>
+                    Ручная роспись требует внимания к деталям,
+                    аккуратности и творческого подхода.
+                    Именно поэтому каждый такой дизайн получается особенным.
+                </p>
+            </div>
+
+            <div class="manicure-gallery">
+                <img src="{% static 'img/services/manicure/Screenshot_20220311-220726.png' %}"
+                     alt="Яркая цветочная роспись">
+                <img src="{% static 'img/services/manicure/Screenshot_20220311-221003.png' %}"
+                     alt="Цветочный дизайн ногтей">
+                <img src="{% static 'img/services/manicure/Screenshot_20220311-221934.png' %}"
+                     alt="Маникюр с авторской ручной росписью">
+            </div>
+        </div>
+    </section>
+
+    <section class="manicure-container">
+        <div class="manicure-booking">
+            <h2>Порадуйте себя красивым маникюром!</h2>
+            <p>
+                Выберите понравившийся вариант или приходите
+                со своей идеей — вместе подберём подходящий дизайн.
+            </p>
+            <a href="{% url 'catalog:free_window' %}"
+               class="manicure-button">
+                Записаться на маникюр
+            </a>
+            <a href="{% url 'catalog:list_of_services' %}"
+               class="beauty-button beauty-button--secondary">
+                Вернуться к моим услугам
+            </a>
+        </div>
+    </section>
+
+</div>
+
 {% endblock %}
+
 {% block footer %}
-     {{ block.super }}
-{% endblock %}Назад
+    {{ block.super }}
+{% endblock %}
